@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://clkid2epfysb8"]
+
+[ext_resource type="Script" uid="uid://1l1f4t3hkxmh" path="res://CODIGOS/corredor.gd" id="1_p2qwv"]
+[ext_resource type="Texture2D" uid="uid://craxnwaorqm5e" path="res://ARTES/Corredor fase 2 com quadro.png" id="1_v3jqa"]
+[ext_resource type="Script" uid="uid://dichkoyp7yjh3" path="res://CODIGOS/porta.gd" id="2_xyy7q"]
+[ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="3_yqp3g"]
+[ext_resource type="Texture2D" uid="uid://cj4ns63qm8cv0" path="res://ARTES/Quadro fase 2.png" id="4_qhcia"]
+[ext_resource type="Texture2D" uid="uid://cv2b0g4nh4nwl" path="res://ARTES/Atras do quadro fase 2.png" id="5_bpi2w"]
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="6_p2qwv"]
+[ext_resource type="Texture2D" uid="uid://dm2hm137gm35n" path="res://ARTES/Seta redonda.png" id="8_yw1im"]
+
+[node name="Corredor" type="Node2D" unique_id=203685135]
+script = ExtResource("1_p2qwv")
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=812395788]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1919.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_v3jqa")
+
+[node name="Preto" type="ColorRect" parent="." unique_id=1289994508]
+offset_right = 1917.0
+offset_bottom = 1076.0
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="Portas" type="HBoxContainer" parent="." unique_id=1496241902]
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PortaEscritório" type="Area2D" parent="Portas" unique_id=44245288]
+script = ExtResource("2_xyy7q")
+destino = "res://CENAS/escritório.tscn"
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Portas/PortaEscritório" unique_id=1977256487]
+polygon = PackedVector2Array(1548, 214, 1337, 311, 1331, 880, 1535, 993)
+
+[node name="PortaCâmera" type="Area2D" parent="Portas" unique_id=2086080861]
+script = ExtResource("2_xyy7q")
+destino = "res://CENAS/câmeras.tscn"
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Portas/PortaCâmera" unique_id=859042324]
+polygon = PackedVector2Array(431, 343, 545, 388, 543, 743, 429, 792)
+
+[node name="PortaRecepção" type="Area2D" parent="Portas" unique_id=1762818141]
+script = ExtResource("2_xyy7q")
+destino = "res://CENAS/recepção.tscn"
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Portas/PortaRecepção" unique_id=264373825]
+polygon = PackedVector2Array(901, 617, 902, 480, 943, 464, 946, 644)
+
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("3_yqp3g")]
+
+[node name="QuadroChao" type="Area2D" parent="." unique_id=904961416]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="QuadroChao" unique_id=997533737]
+polygon = PackedVector2Array(417, 890, 485, 1034, 691, 973, 619, 847)
+
+[node name="Quadro" type="CanvasLayer" parent="." unique_id=820761223]
+visible = false
+
+[node name="ImagemTras" type="TextureButton" parent="Quadro" unique_id=1774349535]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture_normal = ExtResource("5_bpi2w")
+
+[node name="ImagemFrente" type="TextureButton" parent="Quadro" unique_id=1988243390]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture_normal = ExtResource("4_qhcia")
+
+[node name="BotaoFechar" type="TextureButton" parent="Quadro" unique_id=103569051]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("6_p2qwv")
+
+[node name="BotaoGirar" type="Button" parent="Quadro" unique_id=2108328030]
+anchors_preset = -1
+anchor_left = 0.023000002
+anchor_top = -0.26900002
+anchor_right = 0.023000002
+anchor_bottom = -0.26900002
+offset_left = 1569.84
+offset_top = 1053.52
+offset_right = 2323.84
+offset_bottom = 1869.52
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("8_yw1im")
+flat = true
+
+[node name="Luz" type="Area2D" parent="." unique_id=2044992943]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Luz" unique_id=1944421701]
+polygon = PackedVector2Array(806, 369, 798, 348, 799, 334, 882, 336, 883, 347, 874, 371)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Luz" unique_id=1858103003]
+polygon = PackedVector2Array(727, 53, 722, 94, 745, 162, 947, 163, 979, 93, 982, 61)

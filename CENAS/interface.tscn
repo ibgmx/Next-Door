@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://diqas4ivyxcya"]
+
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="1_5rjst"]
+[ext_resource type="Script" uid="uid://d3fae3kfd7lqk" path="res://CODIGOS/interface.gd" id="1_30t02"]
+[ext_resource type="Texture2D" uid="uid://cot14cxv21mda" path="res://ARTES/botao menu.png" id="3_5nu0x"]
+[ext_resource type="Shader" uid="uid://dkfaybu6uno4k" path="res://SHADERS/desfoque.gdshader" id="4_1olv4"]
+[ext_resource type="Texture2D" uid="uid://d25effrqvmxp7" path="res://ARTES/botao voltar.png" id="5_aryhp"]
+[ext_resource type="Texture2D" uid="uid://c6mcyhs6ptylp" path="res://ARTES/Início.png" id="6_8xajy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aq51"]
+shader = ExtResource("4_1olv4")
+shader_parameter/blur_strength = 3.0
+
+[node name="Interface" type="CanvasLayer" unique_id=413016726]
+script = ExtResource("1_30t02")
+
+[node name="BotãoVoltar" type="TextureButton" parent="." unique_id=2065983328]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 199.00002
+offset_top = -19.0
+offset_right = 1369.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("1_5rjst")
+
+[node name="BotaoMenu" type="TextureButton" parent="." unique_id=475274068]
+offset_left = 40.999996
+offset_top = 23.999998
+offset_right = 966.0
+offset_bottom = 464.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_5nu0x")
+
+[node name="BotãoInventário" type="TextureButton" parent="." unique_id=2099595556]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuPausa" type="CanvasLayer" parent="." unique_id=1666687825]
+process_mode = 3
+visible = false
+
+[node name="Desfoque" type="ColorRect" parent="MenuPausa" unique_id=103781532]
+material = SubResource("ShaderMaterial_5aq51")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.078431375)
+
+[node name="Continuar" type="TextureButton" parent="MenuPausa" unique_id=1839895955]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 833.0
+offset_top = 331.0
+offset_right = -128.0
+offset_bottom = -311.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("5_aryhp")
+
+[node name="Reiniciar" type="TextureButton" parent="MenuPausa" unique_id=1436561586]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 832.0
+offset_top = 454.0
+offset_right = -129.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("5_aryhp")
+
+[node name="Inicio" type="TextureButton" parent="MenuPausa" unique_id=193100594]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 835.00006
+offset_top = 579.0
+offset_right = 521.0
+offset_bottom = 343.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("6_8xajy")

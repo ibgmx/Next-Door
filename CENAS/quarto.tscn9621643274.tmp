@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://d0e11apayskqd"]
+
+[ext_resource type="Texture2D" uid="uid://bd5y61bl2uyvi" path="res://ARTES/Quarto fase 1.png" id="1_4q2cb"]
+[ext_resource type="Script" uid="uid://cl5jnwxvoxye" path="res://CODIGOS/quarto.gd" id="1_agmmv"]
+[ext_resource type="Script" uid="uid://dichkoyp7yjh3" path="res://CODIGOS/porta.gd" id="2_1hndw"]
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="2_miv5h"]
+[ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="3_kqn0h"]
+[ext_resource type="Texture2D" uid="uid://cnkoaunax6wkx" path="res://ARTES/Gaveta fase 1 sem chave e papel.png" id="5_miv5h"]
+[ext_resource type="Texture2D" uid="uid://ckbvn5ar78s2m" path="res://ARTES/Mala fase 1.png" id="6_g2plw"]
+[ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="7_1gkfe"]
+[ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="9_qiybb"]
+
+[node name="Quarto" type="Node2D" unique_id=1372419097]
+script = ExtResource("1_agmmv")
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=1112822734]
+texture = ExtResource("1_4q2cb")
+
+[node name="PortaQuarto" type="Area2D" parent="." unique_id=1950443738]
+script = ExtResource("2_1hndw")
+destino = "res://CENAS/corredor.tscn"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PortaQuarto" unique_id=1172034590]
+polygon = PackedVector2Array(152, 64, 575, 83, 567, 732, 150, 762)
+
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("3_kqn0h")]
+
+[node name="Gaveta" type="Area2D" parent="." unique_id=1374038846]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gaveta" unique_id=204801860]
+polygon = PackedVector2Array(711, 643, 711, 573, 838, 563, 839, 634)
+
+[node name="Mala" type="Area2D" parent="." unique_id=1294747986]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Mala" unique_id=1129561851]
+polygon = PackedVector2Array(1228, 884, 1227, 820, 1380, 778, 1416, 792, 1442, 785, 1467, 806, 1490, 806, 1495, 789, 1549, 796, 1548, 883, 1418, 941)
+
+[node name="GavetaAberta" type="CanvasLayer" parent="." unique_id=531202481]
+
+[node name="ImagemGaveta" type="TextureRect" parent="GavetaAberta" unique_id=1186028296]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_miv5h")
+
+[node name="BotaoFechar" type="TextureButton" parent="GavetaAberta" unique_id=974535258]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("2_miv5h")
+
+[node name="Chave1" type="Area2D" parent="GavetaAberta" unique_id=2115083187]
+
+[node name="Chave" type="Sprite2D" parent="GavetaAberta/Chave1" unique_id=1394731]
+position = Vector2(1021, 701.9999)
+rotation = 1.1466813
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_1gkfe")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Chave1" unique_id=466478535]
+polygon = PackedVector2Array(949, 755, 945, 746, 959, 731, 964, 731, 970, 723, 979, 723, 983, 714, 993, 718, 997, 710, 1004, 713, 1011, 704, 1021, 705, 1020, 691, 1028, 697, 1020, 676, 1037, 671, 1042, 655, 1053, 644, 1065, 641, 1081, 645, 1097, 659, 1102, 671, 1105, 688, 1100, 704, 1091, 714, 1075, 719, 1064, 716, 1052, 709, 1031, 719, 1012, 727, 984, 740)
+
+[node name="MalaAberta" type="CanvasLayer" parent="." unique_id=1537851555]
+
+[node name="ImagemMala" type="TextureRect" parent="MalaAberta" unique_id=1572759231]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_g2plw")
+
+[node name="BotaoFechar" type="TextureButton" parent="MalaAberta" unique_id=168689553]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("2_miv5h")
+
+[node name="Papel" type="Area2D" parent="MalaAberta" unique_id=1870941390]
+
+[node name="Codigo1" type="Sprite2D" parent="MalaAberta/Papel" unique_id=875502102]
+position = Vector2(997, 515.00006)
+scale = Vector2(1.2509578, 1.1040268)
+texture = ExtResource("9_qiybb")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="MalaAberta/Papel" unique_id=1332930229]
+polygon = PackedVector2Array(835, 479, 1084, 436, 1157, 537, 904, 596)
+
+[node name="Descricao" type="Label" parent="." unique_id=900847491]
+offset_right = 40.0
+offset_bottom = 23.0

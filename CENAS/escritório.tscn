@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://bsaoo6wf04q0t"]
+
+[ext_resource type="Script" uid="uid://cp3h00jhsgiru" path="res://CODIGOS/escritório.gd" id="1_m0gyr"]
+[ext_resource type="Texture2D" uid="uid://bay2jmhrcc4ne" path="res://ARTES/Escritório fase 3 sem papel.png" id="1_m1dhr"]
+[ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_hm2e3"]
+[ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_fy1qd"]
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="5_7gemc"]
+[ext_resource type="Texture2D" uid="uid://cnkoaunax6wkx" path="res://ARTES/Gaveta fase 1 sem chave e papel.png" id="6_7gemc"]
+
+[node name="Escritório" type="Node2D" unique_id=619508130]
+script = ExtResource("1_m0gyr")
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=11947805]
+texture = ExtResource("1_m1dhr")
+
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("2_hm2e3")]
+
+[node name="Gaveta" type="Area2D" parent="." unique_id=918154039]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gaveta" unique_id=1252992531]
+polygon = PackedVector2Array(1307, 807, 1306, 736, 1563, 734, 1565, 806)
+
+[node name="Gavetamesa" type="Area2D" parent="." unique_id=173411795]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gavetamesa" unique_id=1474122031]
+position = Vector2(-734.8762, -13.999878)
+scale = Vector2(0.8807915, 0.99999976)
+polygon = PackedVector2Array(1307, 807, 1306, 736, 1563, 734, 1565, 806)
+
+[node name="TelaSenha" type="CanvasLayer" parent="." unique_id=1660107470]
+
+[node name="CampoTexto" type="LineEdit" parent="TelaSenha" unique_id=530062364]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.5
+offset_top = -40.5
+offset_right = 228.5
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BotaoConfirmar" type="Button" parent="TelaSenha" unique_id=400887028]
+offset_left = 731.0
+offset_top = 582.0
+offset_right = 1191.0
+offset_bottom = 658.0
+text = "CONFIRMAR"
+
+[node name="Mensagem" type="Label" parent="TelaSenha" unique_id=1844026716]
+offset_left = 734.0
+offset_top = 426.0
+offset_right = 886.3333
+offset_bottom = 449.0
+scale = Vector2(3, 3)
+text = "texto"
+horizontal_alignment = 1
+
+[node name="BotaoFechar" type="TextureButton" parent="TelaSenha" unique_id=360025838]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("5_7gemc")
+
+[node name="GavetaMesa" type="CanvasLayer" parent="." unique_id=571040131]
+
+[node name="ColorRect" type="ColorRect" parent="GavetaMesa" unique_id=2062273627]
+offset_right = 1921.0
+offset_bottom = 1082.0
+color = Color(0.43606558, 0.17888534, 0.06673363, 1)
+
+[node name="Fundo" type="TextureRect" parent="GavetaMesa" unique_id=1125639728]
+offset_right = 1945.0
+offset_bottom = 1080.0
+texture = ExtResource("4_fy1qd")
+
+[node name="BotaoFechar" type="TextureButton" parent="GavetaMesa" unique_id=363487261]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("5_7gemc")
+
+[node name="Gavetinha" type="CanvasLayer" parent="." unique_id=370896495]
+
+[node name="ColorRect" type="ColorRect" parent="Gavetinha" unique_id=1459993049]
+offset_right = 1921.0
+offset_bottom = 1082.0
+color = Color(0.43606558, 0.17888534, 0.06673363, 1)
+
+[node name="Fundo" type="TextureRect" parent="Gavetinha" unique_id=1257639272]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_7gemc")
+
+[node name="BotaoFechar" type="TextureButton" parent="Gavetinha" unique_id=1214053145]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("5_7gemc")

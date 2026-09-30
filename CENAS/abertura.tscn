@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bmgk4xe2j3pb5"]
+
+[ext_resource type="Script" uid="uid://mte6uc3kt3ok" path="res://CODIGOS/abertura.gd" id="1_aeton"]
+
+[node name="Abertura" type="Control" unique_id=1589498068]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_aeton")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=1562168858]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1919.0
+offset_bottom = 1081.0
+color = Color(0, 0, 0, 1)
+
+[node name="Texto" type="Label" parent="." unique_id=339745956]
+texture_filter = 1
+layout_mode = 1
+offset_left = 446.00003
+offset_top = 498.00006
+offset_right = 490.00003
+offset_bottom = 521.00006
+scale = Vector2(5, 5)
+text = "Texto"
+vertical_alignment = 1

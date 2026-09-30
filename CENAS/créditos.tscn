@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bko83mi6jgwlq"]
+
+[ext_resource type="Script" uid="uid://rkkatct7d2kb" path="res://CODIGOS/créditos.gd" id="1_jj22b"]
+[ext_resource type="Texture2D" uid="uid://chwx3pywi1sof" path="res://ARTES/tela inicial.png" id="2_vf862"]
+[ext_resource type="Texture2D" uid="uid://d25effrqvmxp7" path="res://ARTES/botao voltar.png" id="3_0raex"]
+
+[node name="Créditos" type="Control" unique_id=691879815]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jj22b")
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=1053648532]
+layout_mode = 0
+offset_left = -166.0
+offset_top = -107.0
+offset_right = 3674.0
+offset_bottom = 2053.0
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_vf862")
+
+[node name="Luz" type="ColorRect" parent="." unique_id=679985519]
+layout_mode = 0
+offset_right = 1951.0
+offset_bottom = 1106.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="Voltar" type="TextureButton" parent="." unique_id=1968203940]
+layout_mode = 0
+offset_left = 188.0
+offset_top = 889.0
+offset_right = 1147.0
+offset_bottom = 1327.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("3_0raex")
+
+[connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]

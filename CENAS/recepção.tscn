@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cvifxtystbmsv"]
+
+[ext_resource type="Script" uid="uid://c15e7mtv5x7ta" path="res://CODIGOS/recepção.gd" id="1_2v43m"]
+[ext_resource type="Texture2D" uid="uid://bdik50ac1ejny" path="res://ARTES/Recepção fase 5.png" id="1_o5j54"]
+[ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_ka3vc"]
+
+[node name="Recepção" type="Node2D" unique_id=121315396]
+script = ExtResource("1_2v43m")
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=1429306236]
+offset_right = 2114.0
+offset_bottom = 1080.0
+texture = ExtResource("1_o5j54")
+
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("2_ka3vc")]
+
+[node name="Código" type="Area2D" parent="." unique_id=1748289786]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Código" unique_id=829453276]
+position = Vector2(-41, 0)
+polygon = PackedVector2Array(1298, 559, 1298, 504, 1354, 505, 1354, 562)
+
+[node name="TelaCodigo" type="CanvasLayer" parent="." unique_id=1092154179]
+
+[node name="CampoTexto" type="LineEdit" parent="TelaCodigo" unique_id=2011308920]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.5
+offset_top = -40.5
+offset_right = 228.5
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BotaoConfirmar" type="Button" parent="TelaCodigo" unique_id=1383173189]
+offset_left = 731.0
+offset_top = 582.0
+offset_right = 1191.0
+offset_bottom = 658.0
+text = "CONFIRMAR"
+
+[node name="Mensagem" type="Label" parent="TelaCodigo" unique_id=1426424740]
+offset_left = 670.0
+offset_top = 177.00002
+offset_right = 857.3334
+offset_bottom = 200.00002
+scale = Vector2(3, 3)
+text = "texto"
+horizontal_alignment = 1

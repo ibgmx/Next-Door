@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://b54y1txhdhyvu"]
+
+[ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="1_l0xbu"]
+[ext_resource type="Script" uid="uid://b46x4ygurm3xo" path="res://CODIGOS/câmeras.gd" id="1_rgqmo"]
+[ext_resource type="Texture2D" uid="uid://wi1pfpy6jf3v" path="res://ARTES/Sala de controle fase 4 sem papel.png" id="1_w4dvs"]
+[ext_resource type="Texture2D" uid="uid://bd5y61bl2uyvi" path="res://ARTES/Quarto fase 1.png" id="4_dee34"]
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="4_qugrv"]
+[ext_resource type="Texture2D" uid="uid://bdik50ac1ejny" path="res://ARTES/Recepção fase 5.png" id="6_y5f2n"]
+[ext_resource type="Texture2D" uid="uid://dqbwfb03qwiyt" path="res://ARTES/Gaveta fase 4 sem gravador e papel.png" id="7_ybef1"]
+
+[node name="Câmeras" type="Node2D" unique_id=155630789]
+script = ExtResource("1_rgqmo")
+
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("1_l0xbu")]
+
+[node name="Fundo" type="TextureRect" parent="." unique_id=1740439030]
+texture = ExtResource("1_w4dvs")
+
+[node name="Quarto" type="Area2D" parent="." unique_id=798768412]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Quarto" unique_id=1898774704]
+polygon = PackedVector2Array(423, 377, 424, 484, 253, 483, 254, 380)
+
+[node name="Gaveta" type="Area2D" parent="." unique_id=408532110]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gaveta" unique_id=1765064842]
+polygon = PackedVector2Array(638, 847, 635, 778, 833, 781, 831, 847)
+
+[node name="Recepção" type="Area2D" parent="." unique_id=1438708682]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Recepção" unique_id=1102223274]
+polygon = PackedVector2Array(954, 594, 954, 651, 1032, 648, 1032, 591)
+
+[node name="TelaCodigo" type="CanvasLayer" parent="." unique_id=1358619348]
+
+[node name="CampoTexto" type="LineEdit" parent="TelaCodigo" unique_id=1630715141]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.5
+offset_top = -40.5
+offset_right = 228.5
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BotaoConfirmar" type="Button" parent="TelaCodigo" unique_id=440486853]
+offset_left = 731.0
+offset_top = 582.0
+offset_right = 1191.0
+offset_bottom = 658.0
+text = "CONFIRMAR"
+
+[node name="Mensagem" type="Label" parent="TelaCodigo" unique_id=1559070478]
+offset_left = 734.0
+offset_top = 426.0
+offset_right = 886.3333
+offset_bottom = 449.0
+scale = Vector2(3, 3)
+text = "texto"
+horizontal_alignment = 1
+
+[node name="C1" type="CanvasLayer" parent="." unique_id=1158387397]
+
+[node name="Fundo" type="TextureRect" parent="C1" unique_id=153520066]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_dee34")
+
+[node name="BotaoFechar" type="TextureButton" parent="C1" unique_id=784919696]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("4_qugrv")
+
+[node name="C2" type="CanvasLayer" parent="." unique_id=343559173]
+
+[node name="Fundo" type="TextureRect" parent="C2" unique_id=1184101092]
+offset_right = 2114.0
+offset_bottom = 1080.0
+texture = ExtResource("6_y5f2n")
+
+[node name="BotaoFechar" type="TextureButton" parent="C2" unique_id=628886447]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("4_qugrv")
+
+[node name="GavetaAberta" type="CanvasLayer" parent="." unique_id=631495605]
+
+[node name="Gaveta" type="TextureRect" parent="GavetaAberta" unique_id=18291014]
+offset_right = 1955.0
+offset_bottom = 1080.0
+texture = ExtResource("7_ybef1")
+
+[node name="BotaoFechar" type="TextureButton" parent="GavetaAberta" unique_id=777450562]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("4_qugrv")

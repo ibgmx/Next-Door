@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://diw5s8vpokcv4"]
+
+[ext_resource type="Script" uid="uid://bjdim3li6m7ea" path="res://CODIGOS/final.gd" id="1_2ppol"]
+[ext_resource type="Script" uid="uid://w7oo1bal4chc" path="res://CODIGOS/texto.gd" id="1_eagmr"]
+
+[node name="Final" type="Control" unique_id=256258417]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2ppol")
+
+[node name="Fundo" type="ColorRect" parent="." unique_id=270963579]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 1922.0
+offset_bottom = 1082.0
+color = Color(0, 0, 0, 1)
+
+[node name="Texto" type="Label" parent="." unique_id=434051657]
+texture_filter = 1
+layout_mode = 0
+offset_left = 839.00006
+offset_top = 417.0
+offset_right = 883.00006
+offset_bottom = 440.0
+scale = Vector2(5, 5)
+text = "Texto"
+script = ExtResource("1_eagmr")
+
+[node name="BotaoInicio" type="Button" parent="." unique_id=1850069205]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 761.00006
+offset_top = 902.0
+offset_right = 912.00006
+offset_bottom = 933.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+text = "VOLTAR AO INÍCIO"
+flat = true
+
+[connection signal="pressed" from="BotaoInicio" to="." method="_on_botao_inicio_pressed"]
