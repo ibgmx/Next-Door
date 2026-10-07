@@ -6,6 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_fy1qd"]
 [ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="5_7gemc"]
 [ext_resource type="Texture2D" uid="uid://cnkoaunax6wkx" path="res://ARTES/Gaveta fase 1 sem chave e papel.png" id="6_7gemc"]
+[ext_resource type="AudioStream" uid="uid://drg5ltcleq3dr" path="res://SONS/porta1.mp3" id="6_boebt"]
+[ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="6_fm0xq"]
+[ext_resource type="AudioStream" uid="uid://o63cmtv7ie72" path="res://SONS/fechando.mp3" id="6_y8s8v"]
+[ext_resource type="AudioStream" uid="uid://5720hp5ncgep" path="res://SONS/abrindo.mp3" id="7_erfst"]
+[ext_resource type="Texture2D" uid="uid://bchsdigwklfhx" path="res://ARTES/Papel gaveta fase 1.png" id="7_x167n"]
+[ext_resource type="Texture2D" uid="uid://quancnifscwj" path="res://ARTES/Papel dica fase 3.png" id="9_6h53n"]
+[ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="9_bwvpk"]
+[ext_resource type="Texture2D" uid="uid://dpo7dhlvhy8lu" path="res://ARTES/Papel fase 4.png" id="10_rtii7"]
+[ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="12_bwvpk"]
+[ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="13_w6xxg"]
+[ext_resource type="AudioStream" uid="uid://dsgdcqihn5xs2" path="res://SONS/telefone.mp3" id="16_41dsb"]
 
 [node name="Escritório" type="Node2D" unique_id=619508130]
 script = ExtResource("1_m0gyr")
@@ -14,6 +25,11 @@ script = ExtResource("1_m0gyr")
 texture = ExtResource("1_m1dhr")
 
 [node name="Interface" parent="." unique_id=413016726 instance=ExtResource("2_hm2e3")]
+
+[node name="Taylor" type="Area2D" parent="." unique_id=730388301]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Taylor" unique_id=1461903006]
+polygon = PackedVector2Array(1313, 442, 1487, 443, 1492, 323, 1312, 323)
 
 [node name="Gaveta" type="Area2D" parent="." unique_id=918154039]
 
@@ -28,6 +44,7 @@ scale = Vector2(0.8807915, 0.99999976)
 polygon = PackedVector2Array(1307, 807, 1306, 736, 1563, 734, 1565, 806)
 
 [node name="TelaSenha" type="CanvasLayer" parent="." unique_id=1660107470]
+visible = false
 
 [node name="CampoTexto" type="LineEdit" parent="TelaSenha" unique_id=530062364]
 anchors_preset = 8
@@ -41,20 +58,23 @@ offset_right = 228.5
 offset_bottom = 40.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+alignment = 1
 
 [node name="BotaoConfirmar" type="Button" parent="TelaSenha" unique_id=400887028]
 offset_left = 731.0
 offset_top = 582.0
 offset_right = 1191.0
 offset_bottom = 658.0
+theme_override_font_sizes/font_size = 40
 text = "CONFIRMAR"
 
-[node name="Mensagem" type="Label" parent="TelaSenha" unique_id=1844026716]
+[node name="Mensagem" type="Label" parent="TelaSenha" unique_id=2026790921]
 offset_left = 734.0
 offset_top = 426.0
-offset_right = 886.3333
-offset_bottom = 449.0
-scale = Vector2(3, 3)
+offset_right = 1185.0
+offset_bottom = 467.0
+theme_override_font_sizes/font_size = 40
 text = "texto"
 horizontal_alignment = 1
 
@@ -74,6 +94,7 @@ scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("5_7gemc")
 
 [node name="GavetaMesa" type="CanvasLayer" parent="." unique_id=571040131]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GavetaMesa" unique_id=2062273627]
 offset_right = 1921.0
@@ -100,12 +121,25 @@ rotation = 3.1415927
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("5_7gemc")
 
-[node name="Gavetinha" type="CanvasLayer" parent="." unique_id=370896495]
+[node name="Chave3" type="Area2D" parent="GavetaMesa" unique_id=911324064]
 
-[node name="ColorRect" type="ColorRect" parent="Gavetinha" unique_id=1459993049]
-offset_right = 1921.0
-offset_bottom = 1082.0
-color = Color(0.43606558, 0.17888534, 0.06673363, 1)
+[node name="Chave" type="Sprite2D" parent="GavetaMesa/Chave3" unique_id=2131839389]
+position = Vector2(227, 713.99994)
+rotation = -2.7541296
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_fm0xq")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaMesa/Chave3" unique_id=31444909]
+polygon = PackedVector2Array(181, 738, 201, 728, 241, 636, 248, 639, 249, 656, 245, 662, 245, 667, 241, 675, 243, 684, 233, 686, 237, 692, 230, 697, 230, 706, 223, 712, 232, 718, 221, 723, 240, 728, 235, 743, 241, 759, 240, 772, 232, 780, 218, 786, 205, 787, 188, 780, 177, 768, 175, 755)
+
+[node name="Fechando" type="AudioStreamPlayer" parent="GavetaMesa" unique_id=381290167]
+stream = ExtResource("6_y8s8v")
+
+[node name="Abrindo" type="AudioStreamPlayer" parent="GavetaMesa" unique_id=830699700]
+stream = ExtResource("7_erfst")
+
+[node name="Gavetinha" type="CanvasLayer" parent="." unique_id=370896495]
+visible = false
 
 [node name="Fundo" type="TextureRect" parent="Gavetinha" unique_id=1257639272]
 offset_right = 40.0
@@ -126,3 +160,121 @@ grow_vertical = 0
 rotation = 3.1415927
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("5_7gemc")
+
+[node name="Código3" type="Area2D" parent="Gavetinha" unique_id=1963939606]
+
+[node name="Código3" type="Sprite2D" parent="Gavetinha/Código3" unique_id=273438610]
+position = Vector2(967, 524)
+texture = ExtResource("7_x167n")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gavetinha/Código3" unique_id=1201878367]
+polygon = PackedVector2Array(308, 298, 654, 263, 736, 656, 369, 693)
+
+[node name="Abrindo" type="AudioStreamPlayer" parent="Gavetinha" unique_id=1122353268]
+stream = ExtResource("7_erfst")
+
+[node name="Fechando" type="AudioStreamPlayer" parent="Gavetinha" unique_id=489906542]
+stream = ExtResource("6_y8s8v")
+
+[node name="SomPorta" type="AudioStreamPlayer2D" parent="." unique_id=965648568]
+stream = ExtResource("6_boebt")
+
+[node name="SomPortaEntrando" type="AudioStreamPlayer2D" parent="." unique_id=852880176]
+stream = ExtResource("9_bwvpk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=287948264]
+position = Vector2(960, 540)
+
+[node name="Dica" type="Area2D" parent="." unique_id=264258321]
+
+[node name="Dica" type="Sprite2D" parent="Dica" unique_id=224550150]
+position = Vector2(762, 504)
+texture = ExtResource("9_6h53n")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Dica" unique_id=1728982575]
+polygon = PackedVector2Array(404, 496, 404, 471, 449, 471, 449, 496)
+
+[node name="Receita" type="Area2D" parent="." unique_id=613313160]
+
+[node name="Receita" type="Sprite2D" parent="Receita" unique_id=1407669408]
+position = Vector2(1053, 678)
+texture = ExtResource("10_rtii7")
+
+[node name="CP2D2" type="CollisionPolygon2D" parent="Receita" unique_id=802146276]
+polygon = PackedVector2Array(1246, 574, 1246, 639, 1303, 641, 1304, 571, 1244, 572)
+
+[node name="Luz" type="Area2D" parent="." unique_id=181621568]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Luz" unique_id=2099061003]
+polygon = PackedVector2Array(804, 110, 793, 66, 1128, 71, 1104, 111)
+
+[node name="Segurou" type="AudioStreamPlayer" parent="Luz" unique_id=674022964]
+stream = ExtResource("12_bwvpk")
+
+[node name="Soltou" type="AudioStreamPlayer" parent="Luz" unique_id=356871775]
+stream = ExtResource("13_w6xxg")
+
+[node name="Preto" type="ColorRect" parent="." unique_id=1523306175]
+visible = false
+offset_right = 1917.0
+offset_bottom = 1076.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=1951701150]
+layer = 100
+
+[node name="Descricao" type="Label" parent="InterfaceDescricao" unique_id=1784292088]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.425
+anchor_bottom = 0.645
+offset_left = -1916.0
+offset_top = 21.0
+offset_right = -817.0
+offset_bottom = -652.6
+theme_override_font_sizes/font_size = 40
+text = "
+"
+horizontal_alignment = 1
+
+[node name="Telefone" type="Area2D" parent="." unique_id=1481658969]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Telefone" unique_id=1493257197]
+polygon = PackedVector2Array(973, 671, 971, 655, 977, 635, 961, 629, 961, 609, 978, 591, 1015, 588, 1031, 590, 1046, 586, 1061, 588, 1095, 602, 1100, 622, 1089, 635, 1079, 638, 1079, 644, 1080, 658, 1077, 672, 1048, 674, 1012, 676, 976, 675)
+
+[node name="Telefone" type="AudioStreamPlayer" parent="Telefone" unique_id=1534138960]
+stream = ExtResource("16_41dsb")
+
+[node name="Papel1" type="Area2D" parent="." unique_id=1435718479]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Papel1" unique_id=1102928609]
+polygon = PackedVector2Array(393, 413, 392, 312, 499, 314, 500, 420)
+
+[node name="Papel2" type="Area2D" parent="." unique_id=1387437312]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Papel2" unique_id=157068068]
+polygon = PackedVector2Array(725, 419, 728, 330, 822, 324, 821, 421)
+
+[node name="Papel3" type="Area2D" parent="." unique_id=1066151889]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Papel3" unique_id=1590634546]
+polygon = PackedVector2Array(658, 685, 694, 657, 857, 666, 833, 693)
+
+[node name="Caixa" type="Area2D" parent="." unique_id=482907945]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Caixa" unique_id=871639101]
+polygon = PackedVector2Array(1596, 918, 1599, 852, 1598, 828, 1692, 825, 1769, 872, 1772, 935, 1630, 937)
+
+[node name="Cloza" type="Area2D" parent="." unique_id=200777250]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Cloza" unique_id=1334397825]
+polygon = PackedVector2Array(1366, 692, 1367, 626, 1372, 626, 1371, 610, 1390, 595, 1405, 613, 1405, 622, 1414, 625, 1416, 693)
+
+[node name="CP2D2" type="CollisionPolygon2D" parent="Cloza" unique_id=1603515825]
+polygon = PackedVector2Array(1430, 693, 1430, 654, 1437, 653, 1438, 636, 1449, 628, 1463, 637, 1463, 652, 1469, 655, 1470, 695)
+
+[node name="Carimbo" type="Area2D" parent="." unique_id=41359023]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Carimbo" unique_id=762889737]
+polygon = PackedVector2Array(493, 677, 488, 651, 497, 644, 511, 641, 509, 630, 502, 623, 503, 611, 514, 600, 521, 600, 532, 606, 536, 615, 530, 629, 530, 640, 540, 640, 545, 651, 547, 663, 538, 677, 523, 677, 506, 678)

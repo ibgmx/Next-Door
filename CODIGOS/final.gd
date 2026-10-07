@@ -4,10 +4,13 @@ extends Control
 @onready var botao_menu = $BotaoInicio
 
 var textos = [
-	"Você finalmente encontrou a saída.",
-	"Mas algumas respostas são difíceis de aceitar.",
-	"Talvez você nunca tenha estado realmente sozinha.",
-	"FIM"
+	"Eu finalmente encontrei a saída",
+	"Mas algumas respostas são difíceis de aceitar",
+	"Tudo parecia tão real",
+	"É difícil acreditar que isso aconteceu comigo",
+	"Mas o importante é que voltei a realidade.",
+	"FIM.",
+	"Fim?"
 ]
 
 var indice = 0
@@ -21,10 +24,11 @@ func _ready():
 	botao_menu.mouse_entered.connect(_mouse_entrou_botao)
 	botao_menu.mouse_exited.connect(_mouse_saiu_botao)
 
+	await get_tree().create_timer(2.0).timeout
 	_mostrar_texto()
 
-
 func _mostrar_texto():
+
 	if indice >= textos.size():
 		botao_menu.show()
 		return
@@ -33,13 +37,13 @@ func _mostrar_texto():
 
 	novo_texto.text = textos[indice]
 
-	# Centraliza o texto na tela
-	novo_texto.position = Vector2(
-		-texto.size.x / 2,
-		(indice * espacamento) - (textos.size() * espacamento / 2)
-	)
-
+	# Mantém exatamente a posição e o tamanho do Label original.
+	novo_texto.position = texto.position
 	novo_texto.size = texto.size
+
+	# Apenas desloca cada frase verticalmente.
+	novo_texto.position.y += indice * espacamento
+
 	novo_texto.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 	novo_texto.modulate.a = 0.0

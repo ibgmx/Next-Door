@@ -16,12 +16,27 @@ script = ExtResource("1_agmmv")
 [node name="Fundo" type="TextureRect" parent="." unique_id=1112822734]
 texture = ExtResource("1_4q2cb")
 
+[node name="Travesseiro" type="Area2D" parent="." unique_id=388524429]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Travesseiro" unique_id=1460958138]
+polygon = PackedVector2Array(1058, 603, 1111, 583, 1147, 585, 1209, 575, 1226, 575, 1230, 564, 1202, 542, 1164, 523, 1104, 522, 1053, 528, 1005, 538, 969, 546, 962, 560, 978, 571, 995, 573, 1014, 586)
+
+[node name="Texto" type="Area2D" parent="." unique_id=396426728]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Texto" unique_id=277022758]
+polygon = PackedVector2Array(829, 509, 819, 480, 810, 466, 798, 464, 774, 432, 788, 431, 823, 395, 837, 391, 837, 403, 841, 424, 854, 426, 862, 442, 871, 456, 859, 487, 841, 514)
+
+[node name="Dias" type="Area2D" parent="." unique_id=1803206830]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Dias" unique_id=1938120991]
+polygon = PackedVector2Array(1149, 333, 1134, 232, 1189, 240, 1207, 217, 1209, 168, 1276, 205, 1283, 193, 1329, 192, 1348, 217, 1369, 216, 1357, 185, 1439, 201, 1434, 245, 1465, 264, 1492, 233, 1530, 235, 1549, 280, 1565, 314, 1616, 300, 1633, 343, 1672, 379, 1696, 371, 1708, 449, 1641, 477, 1594, 485, 1517, 519, 1483, 505, 1433, 552, 1370, 538, 1325, 531, 1276, 528, 1264, 465, 1217, 425, 1206, 374)
+
 [node name="PortaQuarto" type="Area2D" parent="." unique_id=1950443738]
 script = ExtResource("2_1hndw")
 destino = "res://CENAS/corredor.tscn"
 chave_necessaria = "chave1"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PortaQuarto" unique_id=1172034590]
+[node name="CD" type="CollisionPolygon2D" parent="PortaQuarto" unique_id=1172034590]
 polygon = PackedVector2Array(152, 64, 575, 83, 567, 732, 150, 762)
 
 [node name="Interface" parent="." unique_id=413016726 instance=ExtResource("3_kqn0h")]
@@ -69,6 +84,24 @@ texture = ExtResource("7_1gkfe")
 [node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Chave1" unique_id=466478535]
 polygon = PackedVector2Array(949, 755, 945, 746, 959, 731, 964, 731, 970, 723, 979, 723, 983, 714, 993, 718, 997, 710, 1004, 713, 1011, 704, 1021, 705, 1020, 691, 1028, 697, 1020, 676, 1037, 671, 1042, 655, 1053, 644, 1065, 641, 1081, 645, 1097, 659, 1102, 671, 1105, 688, 1100, 704, 1091, 714, 1075, 719, 1064, 716, 1052, 709, 1031, 719, 1012, 727, 984, 740)
 
+[node name="Papel0" type="Area2D" parent="GavetaAberta" unique_id=544566103]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Papel0" unique_id=944755380]
+polygon = PackedVector2Array(332, 741, 260, 278, 609, 241, 728, 689)
+
+[node name="Cloza" type="Area2D" parent="GavetaAberta" unique_id=1291200186]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Cloza" unique_id=1525697189]
+polygon = PackedVector2Array(757, 511, 798, 371, 797, 335, 824, 316, 871, 312, 896, 326, 916, 345, 897, 398, 872, 468, 848, 536, 835, 554, 804, 560, 774, 552)
+
+[node name="CP2D2" type="CollisionPolygon2D" parent="GavetaAberta/Cloza" unique_id=1895797680]
+polygon = PackedVector2Array(910, 527, 970, 311, 963, 269, 1010, 241, 1087, 240, 1134, 274, 1137, 313, 1121, 341, 1100, 407, 1077, 483, 1044, 572, 1018, 592, 961, 581, 924, 559)
+
+[node name="Remédio" type="Area2D" parent="GavetaAberta" unique_id=641302609]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Remédio" unique_id=1042182281]
+polygon = PackedVector2Array(1169, 584, 1330, 299, 1541, 363, 1409, 656)
+
 [node name="MalaAberta" type="CanvasLayer" parent="." unique_id=1537851555]
 
 [node name="ImagemMala" type="TextureRect" parent="MalaAberta" unique_id=1572759231]
@@ -101,6 +134,11 @@ texture = ExtResource("9_qiybb")
 [node name="CP2D" type="CollisionPolygon2D" parent="MalaAberta/Papel" unique_id=1332930229]
 polygon = PackedVector2Array(835, 479, 1084, 436, 1157, 537, 904, 596)
 
+[node name="Boneca" type="Area2D" parent="MalaAberta" unique_id=1212528879]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="MalaAberta/Boneca" unique_id=1291243205]
+polygon = PackedVector2Array(514, 820, 596, 825, 602, 822, 599, 811, 583, 804, 569, 808, 562, 791, 553, 763, 549, 740, 578, 741, 594, 740, 616, 735, 629, 781, 646, 822, 671, 824, 722, 824, 726, 812, 721, 801, 714, 795, 693, 797, 684, 767, 678, 750, 677, 725, 707, 719, 736, 705, 738, 702, 727, 682, 716, 659, 725, 664, 737, 660, 749, 649, 752, 632, 746, 620, 736, 600, 715, 577, 699, 558, 676, 513, 678, 504, 675, 496, 684, 489, 696, 481, 703, 456, 696, 436, 688, 402, 692, 374, 691, 361, 675, 321, 672, 291, 656, 238, 634, 210, 617, 200, 589, 192, 566, 191, 560, 194, 533, 184, 509, 184, 494, 187, 467, 200, 430, 231, 405, 270, 404, 292, 403, 305, 385, 343, 378, 360, 376, 376, 377, 392, 366, 415, 357, 446, 363, 469, 379, 483, 381, 496, 387, 509, 398, 520, 409, 529, 400, 553, 393, 578, 383, 611, 378, 635, 378, 652, 379, 662, 388, 672, 400, 675, 420, 670, 412, 709, 413, 732, 442, 740, 484, 744, 494, 785)
+
 [node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=407030853]
 layer = 100
 
@@ -111,8 +149,9 @@ anchor_right = 1.425
 anchor_bottom = 0.645
 offset_left = -1916.0
 offset_top = 21.0
-offset_right = -2092.3333
+offset_right = -817.0
 offset_bottom = -652.6
-scale = Vector2(3, 3)
-text = "Texto lalalalallaa"
+theme_override_font_sizes/font_size = 40
+text = "
+"
 horizontal_alignment = 1

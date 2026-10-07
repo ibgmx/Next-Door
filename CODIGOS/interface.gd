@@ -83,12 +83,11 @@ func _unhandled_input(event):
 
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE and event.pressed and not event.echo:
-
 			_alternar_menu()
 
 
 # =========================================================
-# ABRIR / FECHAR
+# ABRIR / FECHAR MENU
 # =========================================================
 
 func _alternar_menu():
@@ -101,11 +100,14 @@ func _alternar_menu():
 
 func _abrir_menu():
 
+	# Fecha somente as telas usadas para inserir códigos/senhas
+	fechar_telas_codigo()
+
 	menu_aberto = true
 
 	menu_pausa.show()
 
-	# Congela completamente o jogo
+	# Congela o jogo
 	get_tree().paused = true
 
 	Cursormanager.cursor_normal()
@@ -123,6 +125,28 @@ func _continuar():
 
 
 # =========================================================
+# FECHAR TELAS DE CÓDIGO
+# =========================================================
+
+func fechar_telas_codigo():
+
+	var cena = get_tree().current_scene
+
+	# Escritório
+	var tela_senha = cena.get_node_or_null("TelaSenha")
+
+	if tela_senha:
+		tela_senha.hide()
+
+
+	# Câmeras / Recepção
+	var tela_codigo = cena.get_node_or_null("TelaCodigo")
+
+	if tela_codigo:
+		tela_codigo.hide()
+
+
+# =========================================================
 # REINICIAR
 # =========================================================
 
@@ -136,7 +160,10 @@ func _reiniciar():
 
 	Cursormanager.cursor_normal()
 
+	# Limpa inventário e progresso
 	Gamemanager.resetar_jogo()
+
+	# Começa novamente pelo quarto
 	Gamemanager.iniciar_jogo()
 
 
@@ -154,10 +181,12 @@ func _inicio():
 
 	Cursormanager.cursor_normal()
 
+	# Limpa inventário e progresso
 	Gamemanager.resetar_jogo()
 
-	Gamemanager.mudar_cena(
-		"res://CENAS/menu.tscn"
+	# Vai para a tela inicial
+	get_tree().change_scene_to_file(
+		"res://CENAS/início.tscn"
 	)
 
 

@@ -42,7 +42,6 @@ offset_bottom = 40.0
 
 [node name="MenuPausa" type="CanvasLayer" parent="." unique_id=1666687825]
 process_mode = 3
-visible = false
 
 [node name="Desfoque" type="ColorRect" parent="MenuPausa" unique_id=103781532]
 material = SubResource("ShaderMaterial_5aq51")
@@ -91,3 +90,5 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("6_8xajy")
+
+[connection signal="pressed" from="MenuPausa/Inicio" to="." method="_on_inicio_pressed"]

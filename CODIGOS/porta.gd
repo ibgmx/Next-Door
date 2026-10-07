@@ -22,6 +22,9 @@ func _clicou(_viewport, event, _shape_idx):
 					Cursormanager.cursor_normal()
 					return
 
+				# Registra que esta porta foi aberta
+				Gamemanager.portas_abertas[chave_necessaria] = true
+
 			Cursormanager.cursor_normal()
 			Gamemanager.mudar_cena(destino)
 

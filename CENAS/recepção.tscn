@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://c15e7mtv5x7ta" path="res://CODIGOS/recepção.gd" id="1_2v43m"]
 [ext_resource type="Texture2D" uid="uid://bdik50ac1ejny" path="res://ARTES/Recepção fase 5.png" id="1_o5j54"]
 [ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_ka3vc"]
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="3_c1ud4"]
+[ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_jifk2"]
+[ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="5_5ljhr"]
+[ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="5_pl41m"]
+[ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="6_iqec1"]
 
 [node name="Recepção" type="Node2D" unique_id=121315396]
 script = ExtResource("1_2v43m")
@@ -34,19 +39,112 @@ offset_right = 228.5
 offset_bottom = 40.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+alignment = 1
 
 [node name="BotaoConfirmar" type="Button" parent="TelaCodigo" unique_id=1383173189]
 offset_left = 731.0
 offset_top = 582.0
 offset_right = 1191.0
 offset_bottom = 658.0
+theme_override_font_sizes/font_size = 40
 text = "CONFIRMAR"
 
 [node name="Mensagem" type="Label" parent="TelaCodigo" unique_id=1426424740]
 offset_left = 670.0
-offset_top = 177.00002
-offset_right = 857.3334
-offset_bottom = 200.00002
-scale = Vector2(3, 3)
+offset_top = 228.00002
+offset_right = 1256.0
+offset_bottom = 269.0
+theme_override_font_sizes/font_size = 40
 text = "texto"
+horizontal_alignment = 1
+
+[node name="BotaoFechar" type="TextureButton" parent="TelaCodigo" unique_id=1223190606]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("3_c1ud4")
+
+[node name="Preto" type="ColorRect" parent="." unique_id=663614010]
+offset_right = 1934.0
+offset_bottom = 1097.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="Luz" type="Area2D" parent="." unique_id=61765308]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Luz" unique_id=1670179302]
+polygon = PackedVector2Array(888, 160, 877, 137, 1050, 133, 1042, 162)
+
+[node name="Segurou" type="AudioStreamPlayer" parent="Luz" unique_id=858341501]
+stream = ExtResource("5_pl41m")
+
+[node name="Soltou" type="AudioStreamPlayer" parent="Luz" unique_id=1225419373]
+stream = ExtResource("6_iqec1")
+
+[node name="Cadeira" type="Area2D" parent="." unique_id=1051410291]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Cadeira" unique_id=459750787]
+polygon = PackedVector2Array(306, 663, 313, 600, 462, 598, 466, 659)
+
+[node name="CadeiraAberta" type="CanvasLayer" parent="." unique_id=1494598257]
+
+[node name="Fundo" type="TextureRect" parent="CadeiraAberta" unique_id=996807537]
+offset_right = 1945.0
+offset_bottom = 1080.0
+texture = ExtResource("4_jifk2")
+
+[node name="BotaoFechar" type="TextureButton" parent="CadeiraAberta" unique_id=1857016621]
+z_index = 10
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 198.0
+offset_top = -19.0
+offset_right = 1368.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("3_c1ud4")
+
+[node name="Cartão" type="Area2D" parent="CadeiraAberta" unique_id=1601589689]
+
+[node name="cartão" type="Sprite2D" parent="CadeiraAberta/Cartão" unique_id=209401947]
+position = Vector2(636, 520)
+texture = ExtResource("5_5ljhr")
+
+[node name="CP2D" type="CollisionPolygon2D" parent="CadeiraAberta/Cartão" unique_id=1460529646]
+polygon = PackedVector2Array(506, 487, 704, 447, 766, 537, 560, 594)
+
+[node name="Porta" type="Area2D" parent="." unique_id=1735909146]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Porta" unique_id=903296026]
+polygon = PackedVector2Array(1201, 820, 1198, 366, 725, 368, 725, 368, 727, 822, 1069.3875, 820.5553)
+
+[node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=347232942]
+layer = 100
+
+[node name="Descricao" type="Label" parent="InterfaceDescricao" unique_id=1527026018]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.425
+anchor_bottom = 0.645
+offset_left = -1916.0
+offset_top = 21.0
+offset_right = -817.0
+offset_bottom = -652.6
+theme_override_font_sizes/font_size = 40
+text = "
+"
 horizontal_alignment = 1

@@ -34,4 +34,14 @@ offset_bottom = 1327.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3_0raex")
 
+[node name="LinkButton" type="LinkButton" parent="." unique_id=1321776187]
+layout_mode = 0
+offset_left = 1446.0
+offset_top = 900.0
+offset_right = 1519.0
+offset_bottom = 917.0
+scale = Vector2(3, 3)
+text = "Saiba mais"
+uri = "https://www.instagram.com/perspectiva.games"
+
 [connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]
