@@ -4,10 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://bdik50ac1ejny" path="res://ARTES/Recepção fase 5.png" id="1_o5j54"]
 [ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_ka3vc"]
 [ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="3_c1ud4"]
+[ext_resource type="AudioStream" uid="uid://djw1gn2xmtteg" path="res://SONS/Pii.mp3" id="3_iqec1"]
 [ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_jifk2"]
 [ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="5_5ljhr"]
+[ext_resource type="AudioStream" uid="uid://d1if5bq4syfnh" path="res://SONS/Erro.mp3" id="5_6f5ko"]
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="5_pl41m"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="6_iqec1"]
+[ext_resource type="AudioStream" uid="uid://dfmlqribot3ic" path="res://SONS/cadeira.mp3" id="8_asl28"]
+[ext_resource type="AudioStream" uid="uid://bqdtqjp50k1fu" path="res://SONS/trancado.mp3" id="9_k6f7c"]
+[ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="11_1n3e4"]
 
 [node name="Recepção" type="Node2D" unique_id=121315396]
 script = ExtResource("1_2v43m")
@@ -24,6 +29,12 @@ texture = ExtResource("1_o5j54")
 [node name="CP2D" type="CollisionPolygon2D" parent="Código" unique_id=829453276]
 position = Vector2(-41, 0)
 polygon = PackedVector2Array(1298, 559, 1298, 504, 1354, 505, 1354, 562)
+
+[node name="Pii" type="AudioStreamPlayer" parent="Código" unique_id=184622145]
+stream = ExtResource("3_iqec1")
+
+[node name="Erro" type="AudioStreamPlayer" parent="Código" unique_id=1579743352]
+stream = ExtResource("5_6f5ko")
 
 [node name="TelaCodigo" type="CanvasLayer" parent="." unique_id=1092154179]
 
@@ -96,6 +107,10 @@ stream = ExtResource("6_iqec1")
 [node name="CP2D" type="CollisionPolygon2D" parent="Cadeira" unique_id=459750787]
 polygon = PackedVector2Array(306, 663, 313, 600, 462, 598, 466, 659)
 
+[node name="Cadeira" type="AudioStreamPlayer" parent="Cadeira" unique_id=1420441336]
+stream = ExtResource("8_asl28")
+volume_db = -12.0
+
 [node name="CadeiraAberta" type="CanvasLayer" parent="." unique_id=1494598257]
 
 [node name="Fundo" type="TextureRect" parent="CadeiraAberta" unique_id=996807537]
@@ -129,6 +144,9 @@ polygon = PackedVector2Array(506, 487, 704, 447, 766, 537, 560, 594)
 
 [node name="Porta" type="Area2D" parent="." unique_id=1735909146]
 
+[node name="Trancada" type="AudioStreamPlayer" parent="Porta" unique_id=1295326015]
+stream = ExtResource("9_k6f7c")
+
 [node name="CP2D" type="CollisionPolygon2D" parent="Porta" unique_id=903296026]
 polygon = PackedVector2Array(1201, 820, 1198, 366, 725, 368, 725, 368, 727, 822, 1069.3875, 820.5553)
 
@@ -148,3 +166,11 @@ theme_override_font_sizes/font_size = 40
 text = "
 "
 horizontal_alignment = 1
+
+[node name="Janela" type="Area2D" parent="." unique_id=483014915]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Janela" unique_id=1171883745]
+polygon = PackedVector2Array(1917, 624, 1802, 609, 1800, 295, 1921, 266)
+
+[node name="SomPortaEntrando" type="AudioStreamPlayer2D" parent="." unique_id=722578497]
+stream = ExtResource("11_1n3e4")

@@ -11,10 +11,14 @@ extends Node2D
 
 @onready var luz = $Luz
 @onready var preto = $Preto
+@onready var som_fechando = $Fechando
+@onready var som_luz_segurou = $Luz/Segurou
+@onready var som_luz_soltou = $Luz/Soltou
 
 @onready var descricao = $InterfaceDescricao/Descricao
 @onready var portas = $Portas
 @onready var nicole = $Nicole
+@onready var area_043 = $Quadro/Código
 
 
 # =========================================================
@@ -30,6 +34,8 @@ var girando := false
 # =========================================================
 
 var piscando := false
+var luz_pressionada := false
+var luz_aguardando_soltou := false
 
 
 # =========================================================
@@ -94,6 +100,11 @@ func _ready():
 	chave2.mouse_entered.connect(_mouse_entrou_chave2)
 	chave2.mouse_exited.connect(_mouse_saiu_chave2)
 
+	area_043.input_pickable = false
+	area_043.input_event.connect(_clicou_043)
+	area_043.mouse_entered.connect(_mouse_entrou_043)
+	area_043.mouse_exited.connect(_mouse_saiu_043)
+
 
 	# =====================================================
 	# VERIFICAR CHAVE2
@@ -141,6 +152,9 @@ func _ready():
 	luz.input_event.connect(_clicou_luz)
 	luz.mouse_entered.connect(_mouse_entrou_luz)
 	luz.mouse_exited.connect(_mouse_saiu_luz)
+
+	if som_luz_segurou:
+		som_luz_segurou.finished.connect(_segurou_terminou)
 
 
 	# Espera a cena terminar de carregar.
@@ -237,6 +251,16 @@ func _mouse_entrou_porta(porta):
 
 	Cursormanager.cursor_clique()
 
+	# RECEPÇÃO
+	if porta.name.to_lower().contains("recep"):
+
+		if Gamemanager.portas_abertas.get("recepcao", false):
+			mostrar_descricao("Porta Desbloqueada")
+		else:
+			mostrar_descricao("Trancada pela segurança.")
+
+		return
+
 	var chave = porta.chave_necessaria
 
 	if Gamemanager.portas_abertas.get(chave, false):
@@ -282,6 +306,12 @@ func _mouse_saiu_nicole():
 # =========================================================
 
 func _iniciar_efeitos_luz():
+
+	# Fechando toca SEMPRE que o corredor é carregado,
+	# independentemente de onde o jogador veio.
+	if som_fechando:
+		som_fechando.stop()
+		som_fechando.play()
 
 	# =====================================================
 	# PISCAR ESPECIAL AO VOLTAR DO QUARTO
@@ -491,6 +521,7 @@ func _clicou_quadro(_viewport, event, _shape_idx):
 func abrir_quadro():
 
 	quadro.show()
+	area_043.input_pickable = quadro_virado
 
 	bloquear_objetos_fundo(true)
 
@@ -498,6 +529,7 @@ func abrir_quadro():
 func _fechar_quadro():
 
 	quadro.hide()
+	area_043.input_pickable = false
 
 	bloquear_objetos_fundo(false)
 
@@ -550,6 +582,7 @@ func _girar_quadro():
 	nova_imagem.show()
 
 	nova_imagem.scale.x = 0.0
+	area_043.input_pickable = (nova_imagem == tras)
 
 
 	if not quadro_virado and not Inventario.tem_item("chave2"):
@@ -592,7 +625,28 @@ func _girar_quadro():
 
 
 	quadro_virado = !quadro_virado
+	area_043.input_pickable = quadro_virado
 	girando = false
+
+
+func _clicou_043(_viewport, event, _shape_idx):
+
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			Cursormanager.cursor_normal()
+			mostrar_descricao("Há algo escrito no quadro.")
+
+
+func _mouse_entrou_043():
+
+	Cursormanager.cursor_clique()
+	mostrar_descricao("Há algo escrito no quadro.")
+
+
+func _mouse_saiu_043():
+
+	Cursormanager.cursor_normal()
+	esconder_descricao()
 
 
 # =========================================================
@@ -659,17 +713,60 @@ func _mouse_saiu_quadro():
 
 func _clicou_luz(_viewport, event, _shape_idx):
 
-	if event is InputEventMouseButton:
+	if not event is InputEventMouseButton:
+		return
 
-		if event.button_index == MOUSE_BUTTON_LEFT:
+	if event.button_index != MOUSE_BUTTON_LEFT:
+		return
 
-			if event.pressed:
+	if event.pressed:
 
-				preto.show()
+		if luz_pressionada:
+			return
 
-			else:
+		luz_pressionada = true
+		luz_aguardando_soltou = false
 
-				preto.hide()
+		preto.show()
+
+		if som_luz_segurou:
+			som_luz_segurou.stop()
+		som_luz_segurou.play()
+
+	else:
+
+		_luz_soltou()
+
+
+func _luz_soltou():
+
+	if not luz_pressionada:
+		return
+
+	luz_pressionada = false
+
+	if som_luz_segurou and som_luz_segurou.playing:
+		luz_aguardando_soltou = true
+		return
+
+	_finalizar_soltou()
+
+
+func _segurou_terminou():
+
+	if luz_aguardando_soltou and not luz_pressionada:
+		luz_aguardando_soltou = false
+		_finalizar_soltou()
+
+
+func _finalizar_soltou():
+
+	luz_aguardando_soltou = false
+	preto.hide()
+
+	if som_luz_soltou:
+		som_luz_soltou.stop()
+		som_luz_soltou.play()
 
 
 # =========================================================

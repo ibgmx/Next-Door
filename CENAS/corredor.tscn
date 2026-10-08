@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="9_yw1im"]
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="10_2g8s6"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="11_dax6y"]
+[ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="12_dax6y"]
 
 [node name="Corredor" type="Node2D" unique_id=203685135]
 script = ExtResource("1_p2qwv")
@@ -26,13 +27,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_v3jqa")
 
+[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("9_yw1im")]
+
 [node name="Preto" type="ColorRect" parent="." unique_id=1289994508]
 offset_right = 1917.0
 offset_bottom = 1076.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.54901963)
-
-[node name="Interface" parent="." unique_id=413016726 instance=ExtResource("9_yw1im")]
 
 [node name="Portas" type="HBoxContainer" parent="." unique_id=1496241902]
 offset_right = 40.0
@@ -68,6 +69,11 @@ polygon = PackedVector2Array(901, 617, 902, 480, 943, 464, 946, 644)
 polygon = PackedVector2Array(417, 890, 485, 1034, 691, 973, 619, 847)
 
 [node name="Quadro" type="CanvasLayer" parent="." unique_id=820761223]
+
+[node name="Código" type="Area2D" parent="Quadro" unique_id=1018412186]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Quadro/Código" unique_id=51678201]
+polygon = PackedVector2Array(947, 469, 919, 434, 921, 387, 958, 356, 1017, 339, 1060, 392, 1091, 349, 1222, 350, 1168, 396, 1208, 402, 1217, 426, 1213, 456, 1194, 473, 1157, 475, 1136, 463, 1097, 473, 991, 468)
 
 [node name="Chave2" type="Area2D" parent="Quadro" unique_id=165208513]
 
@@ -110,11 +116,11 @@ anchor_left = 0.023000002
 anchor_top = -0.26900002
 anchor_right = 0.023000002
 anchor_bottom = -0.26900002
-offset_left = 1565.84
-offset_top = 998.5201
-offset_right = 2331.84
-offset_bottom = 1775.52
-scale = Vector2(0.3, 0.3)
+offset_left = 1595.84
+offset_top = 1066.52
+offset_right = 2361.84
+offset_bottom = 1843.52
+scale = Vector2(0.2, 0.2)
 icon = ExtResource("9_mlfhm")
 flat = true
 
@@ -153,3 +159,6 @@ theme_override_font_sizes/font_size = 40
 text = "
 "
 horizontal_alignment = 1
+
+[node name="Fechando" type="AudioStreamPlayer" parent="." unique_id=1169725169]
+stream = ExtResource("12_dax6y")

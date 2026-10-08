@@ -102,6 +102,7 @@ var ultimo_clique_fora := 0
 var piscando := false
 var luz_pressionada := false
 var luz_aguardando_soltou := false
+var codigo_erro_tween: Tween
 
 
 func _ready():
@@ -342,7 +343,11 @@ func _clicou_recepcao(_viewport, event, _shape_idx):
 			_tocar_chiado_c2()
 
 			_bloquear_areas_fundo()
-			esconder_descricao()
+
+			# O Mouse fica fora da C2 e continua clicável enquanto ela está aberta.
+			mouse.input_pickable = true
+
+			_mostrar_status_recepcao()
 
 			Cursormanager.cursor_normal()
 
@@ -404,7 +409,12 @@ func _fechar_c2():
 
 	_liberar_areas_fundo()
 
-	esconder_descricao()
+	# O texto da C2 só desaparece quando a C2 é fechada.
+	if descricao_tween:
+		descricao_tween.kill()
+	descricao.hide()
+	descricao.modulate.a = 1.0
+	mensagem_item_ativa = false
 
 	Cursormanager.cursor_normal()
 
@@ -713,6 +723,28 @@ func _clicou_ferro(_viewport, event, _shape_idx):
 
 
 # =========================================================
+# TEXTO FIXO DA CÂMERA DA RECEPÇÃO
+# =========================================================
+
+func _mostrar_status_recepcao():
+	if not c2.visible:
+		return
+
+	if descricao_tween:
+		descricao_tween.kill()
+
+	mensagem_item_ativa = true
+	descricao.modulate.a = 1.0
+
+	if Gamemanager.portas_abertas.get("recepcao", false):
+		descricao.text = "Recepção Aberta"
+	else:
+		descricao.text = "Sala fechada"
+
+	descricao.show()
+
+
+# =========================================================
 # MOUSE
 # =========================================================
 
@@ -726,21 +758,34 @@ func _clicou_mouse(_viewport, event, _shape_idx):
 				som_click.stop()
 				som_click.play()
 
+			# O Mouse alterna o estado da recepção.
+			Gamemanager.portas_abertas["recepcao"] = not Gamemanager.portas_abertas.get("recepcao", false)
+
 			Cursormanager.cursor_clique()
+
+			if c2.visible:
+				_mostrar_status_recepcao()
 
 
 func _mouse_entrou_mouse():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Um mouse.")
+	if c2.visible:
+		_mostrar_status_recepcao()
+	else:
+		mostrar_descricao("Um mouse.")
 
 
 func _mouse_saiu_mouse():
 
 	Cursormanager.cursor_normal()
 
-	esconder_descricao()
+	# Na C2, o texto de estado permanece. Fora dela, mantém o comportamento original.
+	if c2.visible:
+		_mostrar_status_recepcao()
+	else:
+		esconder_descricao()
 
 
 # =========================================================
@@ -959,8 +1004,6 @@ func _mouse_entrou_luz():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Uma luz.")
-
 
 func _mouse_saiu_luz():
 
@@ -1059,13 +1102,22 @@ func tentar_sair():
 	if tela_codigo.visible:
 		return
 
+	if codigo_erro_tween:
+		codigo_erro_tween.kill()
+
 	tela_codigo.show()
 	campo.clear()
-	mensagem.hide()
+	mensagem.text = "Quanto tempo se passou?"
+	mensagem.show()
 	campo.grab_focus()
 	ultimo_clique_fora = 0
 	_bloquear_areas_fundo()
-	esconder_descricao()
+
+	if not c2.visible:
+		esconder_descricao()
+	else:
+		_mostrar_status_recepcao()
+
 	Cursormanager.cursor_normal()
 
 
@@ -1074,12 +1126,20 @@ func _fechar_tela_codigo():
 	if not tela_codigo.visible:
 		return
 
+	if codigo_erro_tween:
+		codigo_erro_tween.kill()
+
 	tela_codigo.hide()
 	mensagem.hide()
 	campo.clear()
 	ultimo_clique_fora = 0
 	_liberar_areas_fundo()
-	esconder_descricao()
+
+	if c2.visible:
+		_mostrar_status_recepcao()
+	else:
+		esconder_descricao()
+
 	Cursormanager.cursor_normal()
 
 
@@ -1142,6 +1202,20 @@ func _verificar_codigo():
 
 		campo.clear()
 		campo.grab_focus()
+
+		if codigo_erro_tween:
+			codigo_erro_tween.kill()
+
+		codigo_erro_tween = create_tween()
+		codigo_erro_tween.tween_interval(4.0)
+		codigo_erro_tween.tween_callback(_voltar_pergunta_codigo)
+
+
+func _voltar_pergunta_codigo():
+	if tela_codigo.visible:
+		mensagem.text = "Quanto tempo se passou?"
+		mensagem.show()
+	codigo_erro_tween = null
 
 
 # =========================================================

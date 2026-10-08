@@ -8,7 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://cnkoaunax6wkx" path="res://ARTES/Gaveta fase 1 sem chave e papel.png" id="5_miv5h"]
 [ext_resource type="Texture2D" uid="uid://ckbvn5ar78s2m" path="res://ARTES/Mala fase 1.png" id="6_g2plw"]
 [ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="7_1gkfe"]
+[ext_resource type="AudioStream" uid="uid://5720hp5ncgep" path="res://SONS/abrindo.mp3" id="8_xt7x7"]
 [ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="9_qiybb"]
+[ext_resource type="AudioStream" uid="uid://o63cmtv7ie72" path="res://SONS/fechando.mp3" id="9_vei6u"]
+[ext_resource type="AudioStream" uid="uid://b0nex7erl5ftx" path="res://SONS/MalaAbrindo.mp3" id="12_hblsg"]
+[ext_resource type="AudioStream" uid="uid://w6sqnkpn2iho" path="res://SONS/MalaFechando.mp3" id="13_lerkc"]
+[ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="14_1wpym"]
 
 [node name="Quarto" type="Node2D" unique_id=1372419097]
 script = ExtResource("1_agmmv")
@@ -102,6 +107,12 @@ polygon = PackedVector2Array(910, 527, 970, 311, 963, 269, 1010, 241, 1087, 240,
 [node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Remédio" unique_id=1042182281]
 polygon = PackedVector2Array(1169, 584, 1330, 299, 1541, 363, 1409, 656)
 
+[node name="Abrindo" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=1285353592]
+stream = ExtResource("8_xt7x7")
+
+[node name="Fechando" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=156885079]
+stream = ExtResource("9_vei6u")
+
 [node name="MalaAberta" type="CanvasLayer" parent="." unique_id=1537851555]
 
 [node name="ImagemMala" type="TextureRect" parent="MalaAberta" unique_id=1572759231]
@@ -139,6 +150,12 @@ polygon = PackedVector2Array(835, 479, 1084, 436, 1157, 537, 904, 596)
 [node name="CP2D" type="CollisionPolygon2D" parent="MalaAberta/Boneca" unique_id=1291243205]
 polygon = PackedVector2Array(514, 820, 596, 825, 602, 822, 599, 811, 583, 804, 569, 808, 562, 791, 553, 763, 549, 740, 578, 741, 594, 740, 616, 735, 629, 781, 646, 822, 671, 824, 722, 824, 726, 812, 721, 801, 714, 795, 693, 797, 684, 767, 678, 750, 677, 725, 707, 719, 736, 705, 738, 702, 727, 682, 716, 659, 725, 664, 737, 660, 749, 649, 752, 632, 746, 620, 736, 600, 715, 577, 699, 558, 676, 513, 678, 504, 675, 496, 684, 489, 696, 481, 703, 456, 696, 436, 688, 402, 692, 374, 691, 361, 675, 321, 672, 291, 656, 238, 634, 210, 617, 200, 589, 192, 566, 191, 560, 194, 533, 184, 509, 184, 494, 187, 467, 200, 430, 231, 405, 270, 404, 292, 403, 305, 385, 343, 378, 360, 376, 376, 377, 392, 366, 415, 357, 446, 363, 469, 379, 483, 381, 496, 387, 509, 398, 520, 409, 529, 400, 553, 393, 578, 383, 611, 378, 635, 378, 652, 379, 662, 388, 672, 400, 675, 420, 670, 412, 709, 413, 732, 442, 740, 484, 744, 494, 785)
 
+[node name="Abrindo" type="AudioStreamPlayer" parent="MalaAberta" unique_id=1579673658]
+stream = ExtResource("12_hblsg")
+
+[node name="Fechando" type="AudioStreamPlayer" parent="MalaAberta" unique_id=1826672725]
+stream = ExtResource("13_lerkc")
+
 [node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=407030853]
 layer = 100
 
@@ -155,3 +172,9 @@ theme_override_font_sizes/font_size = 40
 text = "
 "
 horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1338358408]
+position = Vector2(960, 540)
+
+[node name="SomPortaEntrando" type="AudioStreamPlayer2D" parent="." unique_id=1064594968]
+stream = ExtResource("14_1wpym")

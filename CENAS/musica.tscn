@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://11ptm11ruvfw"]
+
+[ext_resource type="Script" uid="uid://cb1xdv5kc5clg" path="res://CODIGOS/musica.gd" id="1_ga1sy"]
+[ext_resource type="AudioStream" uid="uid://c6q4w8cstl8b7" path="res://SONS/musica.mp3" id="2_xoyj1"]
+
+[node name="Musica" type="Node" unique_id=164818275]
+script = ExtResource("1_ga1sy")
+
+[node name="Musica" type="AudioStreamPlayer" parent="." unique_id=1922479194]
+stream = ExtResource("2_xoyj1")
+volume_db = -5.0

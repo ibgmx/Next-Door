@@ -218,7 +218,7 @@ polygon = PackedVector2Array(489, 740, 746, 581, 537, 239, 239, 387)
 [node name="Abrindo" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=176577691]
 stream = ExtResource("12_velyu")
 
-[node name="Fechando" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=192497862]
+[node name="Fechando" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=1318188543]
 stream = ExtResource("13_hs55i")
 
 [node name="SomPorta" type="AudioStreamPlayer2D" parent="." unique_id=1094431608]

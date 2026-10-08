@@ -3,6 +3,16 @@ extends Node2D
 
 @onready var porta = $"Porta"
 @onready var codigo = $"Código"
+@onready var janela = $Janela
+
+@onready var som_cadeira = $Cadeira/Cadeira
+@onready var som_pii = $Código/Pii
+@onready var som_erro = $Código/Erro
+@onready var som_trancada = $Porta/Trancada
+@onready var som_porta_entrando = $SomPortaEntrando
+
+@onready var som_segurou = $Luz/Segurou
+@onready var som_soltou = $Luz/Soltou
 
 @onready var cadeira = $Cadeira
 @onready var cadeira_aberta = $CadeiraAberta
@@ -15,6 +25,7 @@ extends Node2D
 @onready var mensagem = $TelaCodigo/Mensagem
 
 @onready var descricao = $InterfaceDescricao/Descricao
+
 
 # ============================================================
 # LUZ
@@ -32,6 +43,8 @@ var descricao_tween: Tween
 var mensagem_item_ativa := false
 
 var piscando := false
+var luz_pressionada := false
+var luz_aguardando_soltou := false
 
 
 func _ready():
@@ -91,10 +104,13 @@ func _ready():
 	# ============================================================
 
 	porta.input_pickable = true
+	janela.input_pickable = true
 
 	porta.input_event.connect(_clicou_porta)
 	porta.mouse_entered.connect(_mouse_entrou_porta)
 	porta.mouse_exited.connect(_mouse_saiu_porta)
+
+	janela.input_event.connect(_clicou_janela)
 
 
 	# ============================================================
@@ -106,6 +122,9 @@ func _ready():
 	codigo.input_event.connect(_clicou_codigo)
 	codigo.mouse_entered.connect(_mouse_entrou_codigo)
 	codigo.mouse_exited.connect(_mouse_saiu_codigo)
+
+	janela.mouse_entered.connect(_mouse_entrou_janela)
+	janela.mouse_exited.connect(_mouse_saiu_janela)
 
 
 	# ============================================================
@@ -138,6 +157,13 @@ func _ready():
 
 	call_deferred("_iniciar_efeitos_luz")
 
+	if som_segurou:
+		som_segurou.finished.connect(_segurou_terminou)
+
+	if som_porta_entrando:
+		som_porta_entrando.stop()
+		som_porta_entrando.play()
+
 
 # ============================================================
 # BLOQUEAR / LIBERAR FUNDO
@@ -147,16 +173,18 @@ func _desativar_fundo():
 
 	cadeira.input_pickable = false
 	porta.input_pickable = false
+	janela.input_pickable = false
 	codigo.input_pickable = false
-
-	Cursormanager.cursor_normal()
+	luz.input_pickable = false
 
 
 func _ativar_fundo():
 
 	cadeira.input_pickable = true
 	porta.input_pickable = true
+	janela.input_pickable = true
 	codigo.input_pickable = true
+	luz.input_pickable = true
 
 
 # ============================================================
@@ -171,9 +199,11 @@ func _clicou_cadeira(_viewport, event, _shape_idx):
 
 			cadeira_aberta.show()
 
-			_desativar_fundo()
+			if som_cadeira:
+				som_cadeira.stop()
+				som_cadeira.play()
 
-			Cursormanager.cursor_normal()
+			_desativar_fundo()
 
 
 func _mouse_entrou_cadeira():
@@ -229,6 +259,7 @@ func _clicou_cartao(_viewport, event, _shape_idx):
 			cartao.hide()
 			cartao.input_pickable = false
 
+			# ÚNICO objeto que volta para o cursor normal ao clicar
 			Cursormanager.cursor_normal()
 
 			mostrar_item_pego("Você pegou um cartão.")
@@ -259,7 +290,9 @@ func _clicou_porta(_viewport, event, _shape_idx):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
-			Cursormanager.cursor_normal()
+			if som_trancada:
+				som_trancada.stop()
+				som_trancada.play()
 
 			mostrar_descricao(
 				"Talvez você precise abrir em outro lugar."
@@ -293,24 +326,46 @@ func _clicou_codigo(_viewport, event, _shape_idx):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
+			# Se a tela de código já estiver aberta,
+			# clicar novamente no código fecha a tela.
+			if tela_codigo.visible:
+
+				tela_codigo.hide()
+				mensagem.hide()
+				esconder_descricao()
+				ultimo_clique_fora = 0
+
+				return
+
 			if Gamemanager.recepcao_resolvida:
 				return
 
-			# Sem cartão
+			# ====================================================
+			# SEM CARTÃO → SOM DE ERRO
+			# ====================================================
+
 			if not Inventario.tem_item("cartao"):
+
+				if som_erro:
+					som_erro.stop()
+					som_erro.play()
 
 				mostrar_descricao(
 					"Talvez precise de um cartão."
 				)
 
-				Cursormanager.cursor_normal()
-
 				return
 
-			# Com cartão
+			# ====================================================
+			# COM CARTÃO → PI
+			# ====================================================
+
+			if som_pii:
+				som_pii.stop()
+				som_pii.play()
+
 			tela_codigo.show()
 
-			# Esconde imediatamente qualquer descrição
 			esconder_descricao()
 
 			campo.clear()
@@ -319,8 +374,6 @@ func _clicou_codigo(_viewport, event, _shape_idx):
 			campo.grab_focus()
 
 			ultimo_clique_fora = 0
-
-			Cursormanager.cursor_normal()
 
 
 func _mouse_entrou_codigo():
@@ -341,6 +394,34 @@ func _mouse_entrou_codigo():
 
 
 func _mouse_saiu_codigo():
+
+	Cursormanager.cursor_normal()
+
+	if not mensagem_item_ativa:
+		esconder_descricao()
+
+
+# ============================================================
+# JANELA
+# ============================================================
+
+func _clicou_janela(_viewport, event, _shape_idx):
+
+	if event is InputEventMouseButton:
+
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+			mostrar_descricao("Não é uma boa ideia...")
+
+
+func _mouse_entrou_janela():
+
+	Cursormanager.cursor_clique()
+
+	mostrar_descricao("Não é uma boa ideia...")
+
+
+func _mouse_saiu_janela():
 
 	Cursormanager.cursor_normal()
 
@@ -420,6 +501,12 @@ func mostrar_item_pego(texto: String):
 # FECHAR TELA DO CÓDIGO
 # ============================================================
 
+func _process(_delta):
+
+	if luz_pressionada and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		_luz_soltou()
+
+
 func _input(event):
 
 	if not tela_codigo.visible or reiniciando:
@@ -429,23 +516,20 @@ func _input(event):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
-			if not botao.get_global_rect().has_point(event.position):
+			var agora = Time.get_ticks_msec()
 
-				var agora = Time.get_ticks_msec()
+			if agora - ultimo_clique_fora <= 350:
 
-				if agora - ultimo_clique_fora <= 350:
+				tela_codigo.hide()
+				mensagem.hide()
 
-					tela_codigo.hide()
-					mensagem.hide()
+				esconder_descricao()
 
-					# Garante que não ficou nenhum texto antigo
-					esconder_descricao()
+				ultimo_clique_fora = 0
 
-					ultimo_clique_fora = 0
+			else:
 
-				else:
-
-					ultimo_clique_fora = agora
+				ultimo_clique_fora = agora
 
 
 # ============================================================
@@ -475,9 +559,45 @@ func _verificar_codigo():
 		tela_codigo.hide()
 		mensagem.hide()
 
-		esconder_descricao()
+		descricao.text = "Você conseguiu..."
+		descricao.modulate.a = 1.0
+		descricao.show()
+
+		Cursormanager.cursor_normal()
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 		ultimo_clique_fora = 0
+
+		# ========================================================
+		# FADE DE VITÓRIA
+		# ========================================================
+
+		var camada_fade = CanvasLayer.new()
+		camada_fade.layer = 100
+
+		add_child(camada_fade)
+
+		var fade = ColorRect.new()
+
+		fade.color = Color.BLACK
+		fade.modulate.a = 0.0
+
+		fade.set_anchors_and_offsets_preset(
+			Control.PRESET_FULL_RECT
+		)
+
+		camada_fade.add_child(fade)
+
+		var tween = create_tween()
+
+		tween.tween_property(
+			fade,
+			"modulate:a",
+			1.0,
+			1.5
+		)
+
+		await tween.finished
 
 		Gamemanager.mudar_cena(
 			"res://CENAS/final.tscn"
@@ -536,7 +656,6 @@ func efeito_espera():
 		await get_tree().create_timer(espera).timeout
 
 		if not piscando:
-
 			_piscar_aleatorio()
 
 
@@ -598,21 +717,58 @@ func _piscar_aleatorio():
 
 func _clicou_luz(_viewport, event, _shape_idx):
 
-	if event is InputEventMouseButton:
+	if not event is InputEventMouseButton:
+		return
 
-		if event.button_index == MOUSE_BUTTON_LEFT:
+	if event.button_index != MOUSE_BUTTON_LEFT:
+		return
 
-			if event.pressed:
+	if event.pressed:
 
-				# Segurou o botão:
-				# apaga a luz.
-				preto.show()
+		if luz_pressionada:
+			return
 
-			else:
+		luz_pressionada = true
+		luz_aguardando_soltou = false
+		preto.show()
 
-				# Soltou o botão:
-				# acende a luz novamente.
-				preto.hide()
+		if som_segurou:
+			som_segurou.stop()
+			som_segurou.play()
+
+	else:
+		_luz_soltou()
+
+
+func _luz_soltou():
+
+	if not luz_pressionada:
+		return
+
+	luz_pressionada = false
+
+	if som_segurou and som_segurou.playing:
+		luz_aguardando_soltou = true
+		return
+
+	_finalizar_soltou()
+
+
+func _segurou_terminou():
+
+	if luz_aguardando_soltou and not luz_pressionada:
+		luz_aguardando_soltou = false
+		_finalizar_soltou()
+
+
+func _finalizar_soltou():
+
+	luz_aguardando_soltou = false
+	preto.hide()
+
+	if som_soltou:
+		som_soltou.stop()
+		som_soltou.play()
 
 
 # ============================================================

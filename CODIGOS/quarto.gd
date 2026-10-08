@@ -25,6 +25,13 @@ extends Node2D
 @onready var travesseiro = $Travesseiro
 @onready var texto = $Texto
 
+@onready var som_abrindo_gaveta = $GavetaAberta/Abrindo
+@onready var som_fechando_gaveta = $GavetaAberta/Fechando
+@onready var som_abrindo_mala = $MalaAberta/Abrindo
+@onready var som_fechando_mala = $MalaAberta/Fechando
+@onready var camera = $Camera2D
+@onready var som_porta_entrada = $SomPortaEntrando
+
 @onready var descricao = $InterfaceDescricao/Descricao
 
 
@@ -38,6 +45,10 @@ var coleta_tween: Tween
 # Impede que o mouse_exited apague a mensagem
 # enquanto o jogador acabou de pegar um item.
 var descricao_coleta_ativa := false
+
+var texto_tremendo := false
+var camera_posicao_original := Vector2.ZERO
+var tween_camera_texto: Tween
 
 
 # =========================================================
@@ -101,6 +112,8 @@ func _ready():
 	dias.input_pickable = true
 	travesseiro.input_pickable = true
 	texto.input_pickable = true
+
+	camera_posicao_original = camera.position
 
 
 	# =====================================================
@@ -300,6 +313,10 @@ func _clicou_gaveta(_viewport, event, _shape_idx):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 			gaveta_aberta.show()
+
+		if som_abrindo_gaveta:
+			som_abrindo_gaveta.stop()
+			som_abrindo_gaveta.play()
 			mala_aberta.hide()
 
 			gaveta.input_pickable = false
@@ -315,6 +332,10 @@ func _clicou_gaveta(_viewport, event, _shape_idx):
 func _fechar_gaveta():
 
 	gaveta_aberta.hide()
+
+	if som_fechando_gaveta:
+		som_fechando_gaveta.stop()
+		som_fechando_gaveta.play()
 
 	gaveta.input_pickable = true
 	mala.input_pickable = true
@@ -337,6 +358,10 @@ func _clicou_mala(_viewport, event, _shape_idx):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 			mala_aberta.show()
+
+		if som_abrindo_mala:
+			som_abrindo_mala.stop()
+			som_abrindo_mala.play()
 			gaveta_aberta.hide()
 
 			gaveta.input_pickable = false
@@ -352,6 +377,10 @@ func _clicou_mala(_viewport, event, _shape_idx):
 func _fechar_mala():
 
 	mala_aberta.hide()
+
+	if som_fechando_mala:
+		som_fechando_mala.stop()
+		som_fechando_mala.play()
 
 	gaveta.input_pickable = true
 	mala.input_pickable = true
@@ -587,6 +616,24 @@ func _mouse_entrou_texto():
 
 	mostrar_descricao(fala_texto)
 
+	if texto_tremendo:
+		return
+
+	texto_tremendo = true
+	_tremer_camera_texto()
+
+
+func _tremer_camera_texto():
+
+	while texto_tremendo:
+		if tween_camera_texto and tween_camera_texto.is_valid():
+			tween_camera_texto.kill()
+
+		var deslocamento = Vector2(randf_range(-4.0, 4.0), randf_range(-4.0, 4.0))
+		tween_camera_texto = create_tween()
+		tween_camera_texto.tween_property(camera, "position", camera_posicao_original + deslocamento, 0.05)
+		await tween_camera_texto.finished
+
 
 # =========================================================
 # MOUSE SAIU
@@ -595,5 +642,11 @@ func _mouse_entrou_texto():
 func _mouse_saiu():
 
 	Cursormanager.cursor_normal()
+
+	if texto_tremendo:
+		texto_tremendo = false
+		if tween_camera_texto and tween_camera_texto.is_valid():
+			tween_camera_texto.kill()
+		camera.position = camera_posicao_original
 
 	esconder_descricao()

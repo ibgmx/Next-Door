@@ -94,7 +94,7 @@ var luz_aguardando_soltou := false
 @onready var descricao = $InterfaceDescricao/Descricao
 
 var descricao_tween: Tween
-var coleta_tween: Tween
+var coleta_tween
 
 # Impede que o mouse_exited apague a mensagem
 # enquanto o jogador acabou de pegar um item.
@@ -113,6 +113,9 @@ var ultimo_clique_fora := 0
 # =========================================================
 
 func _ready():
+
+	# Cursor dedinho no botão de sair da sala.
+	_configurar_cursor_botao_sair()
 
 	# =====================================================
 	# CANVAS
@@ -221,6 +224,7 @@ func _ready():
 	_configurar_area(telefone, _clicou_telefone, _mouse_entrou_telefone, _mouse_saiu_telefone)
 	_configurar_area(cloza, _clicou_cloza, _mouse_entrou_cloza, _mouse_saiu_cloza)
 
+
 	# =====================================================
 	# TAYLOR
 	# =====================================================
@@ -284,6 +288,7 @@ func _ready():
 
 	# =====================================================
 	# ENTRADA DO ESCRITÓRIO
+	# =====================================================
 
 	if not Gamemanager.escritorio_entrada_feita:
 
@@ -306,6 +311,43 @@ func _ready():
 		if som_porta_entrando:
 			som_porta_entrando.stop()
 			som_porta_entrando.play()
+
+
+# =========================================================
+# CURSOR DO BOTÃO DE SAIR
+# =========================================================
+
+func _configurar_cursor_botao_sair():
+
+	var botao_sair = _encontrar_botao_sair(self)
+
+	if botao_sair == null:
+		return
+
+	if not botao_sair.mouse_entered.is_connected(_mouse_entrou):
+		botao_sair.mouse_entered.connect(_mouse_entrou)
+
+	if not botao_sair.mouse_exited.is_connected(_mouse_saiu):
+		botao_sair.mouse_exited.connect(_mouse_saiu)
+
+
+func _encontrar_botao_sair(no: Node) -> BaseButton:
+
+	for filho in no.get_children():
+
+		if filho is BaseButton:
+			var nome = filho.name.to_lower()
+
+			if nome.contains("sair"):
+				return filho
+
+		var encontrado = _encontrar_botao_sair(filho)
+
+		if encontrado != null:
+			return encontrado
+
+	return null
+
 
 # =========================================================
 # INPUT
@@ -501,7 +543,7 @@ func _mouse_entrou_chave3():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Uma chave.")
+	mostrar_descricao("Uma chave, o que ela abre?")
 
 
 func _mouse_saiu_chave3():
@@ -537,7 +579,7 @@ func _mouse_entrou_codigo3():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Um código.")
+	mostrar_descricao("Parece um código.")
 
 
 func _mouse_saiu_codigo3():
@@ -573,7 +615,7 @@ func _mouse_entrou_receita():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Uma receita.")
+	mostrar_descricao("Que texto confuso...")
 
 
 func _mouse_saiu_receita():
@@ -609,7 +651,7 @@ func _mouse_entrou_dica():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Uma dica.")
+	mostrar_descricao("Que letra estranha.")
 
 
 func _mouse_saiu_dica():
@@ -634,12 +676,12 @@ func _configurar_area(area: Area2D, clique: Callable, entrou: Callable, saiu: Ca
 func _clicou_papel1(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Um papel.")
+		mostrar_descricao("Parece irrelevante.")
 
 
 func _mouse_entrou_papel1():
 	Cursormanager.cursor_clique()
-	mostrar_descricao("Um papel.")
+	mostrar_descricao("Quê?")
 
 
 func _mouse_saiu_papel1():
@@ -650,12 +692,12 @@ func _mouse_saiu_papel1():
 func _clicou_papel2(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Um papel.")
+		mostrar_descricao("Não parece útil.")
 
 
 func _mouse_entrou_papel2():
 	Cursormanager.cursor_clique()
-	mostrar_descricao("Um papel.")
+	mostrar_descricao("Mais um papel.")
 
 
 func _mouse_saiu_papel2():
@@ -666,12 +708,12 @@ func _mouse_saiu_papel2():
 func _clicou_papel3(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Um papel.")
+		mostrar_descricao("Calma... deixa, devo estar vendo errado.")
 
 
 func _mouse_entrou_papel3():
 	Cursormanager.cursor_clique()
-	mostrar_descricao("Um papel.")
+	mostrar_descricao("Algumas anotações.")
 
 
 func _mouse_saiu_papel3():
@@ -682,7 +724,7 @@ func _mouse_saiu_papel3():
 func _clicou_carimbo(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Um carimbo.")
+		mostrar_descricao("A tinta parece fresca.")
 
 
 func _mouse_entrou_carimbo():
@@ -698,7 +740,7 @@ func _mouse_saiu_carimbo():
 func _clicou_caixa(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Uma caixa.")
+		mostrar_descricao("Tá fechada.")
 
 
 func _mouse_entrou_caixa():
@@ -716,7 +758,7 @@ func _clicou_telefone(_viewport, event, _shape_idx):
 		if som_telefone:
 			som_telefone.play()
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Um telefone.")
+		mostrar_descricao("Ahh! que alto!")
 
 
 func _mouse_entrou_telefone():
@@ -732,12 +774,12 @@ func _mouse_saiu_telefone():
 func _clicou_cloza(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Cursormanager.cursor_clique()
-		mostrar_descricao("Clozapina.")
+		mostrar_descricao("Acho que já vi isso...")
 
 
 func _mouse_entrou_cloza():
 	Cursormanager.cursor_clique()
-	mostrar_descricao("Clozapina.")
+	mostrar_descricao("Mais remédios.")
 
 
 func _mouse_saiu_cloza():
@@ -757,7 +799,7 @@ func _clicou_taylor(_viewport, event, _shape_idx):
 
 			Cursormanager.cursor_normal()
 
-			mostrar_descricao("Taylor está aqui.")
+			mostrar_descricao("Estranho.")
 
 			_fade_descricao()
 
@@ -766,7 +808,7 @@ func _mouse_entrou_taylor():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Taylor está aqui.")
+	mostrar_descricao("Parece familiar...")
 
 
 func _mouse_saiu_taylor():
@@ -1229,5 +1271,4 @@ func _fade_descricao_item():
 func _finalizar_fade_coleta():
 
 	descricao_coleta_ativa = false
-
 	descricao.hide()

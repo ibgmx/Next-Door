@@ -44,4 +44,9 @@ scale = Vector2(3, 3)
 text = "Saiba mais"
 uri = "https://www.instagram.com/perspectiva.games"
 
+[node name="Texto" type="Label" parent="." unique_id=1511373251]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 17.0
+
 [connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]

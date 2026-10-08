@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bskp780fohwgm"
-path="res://.godot/imported/Gaegu-Bold.ttf-5f38f75e38c32bdbd1a37fec325cf799.fontdata"
+uid="uid://5jwfj2juq8ms"
+path="res://.godot/imported/PatrickHand-Regular.ttf-b9e493bb1dd9e6fe613eef2abaf966d7.fontdata"
 
 [deps]
 
-source_file="res://Gaegu-Bold.ttf"
-dest_files=["res://.godot/imported/Gaegu-Bold.ttf-5f38f75e38c32bdbd1a37fec325cf799.fontdata"]
+source_file="res://PatrickHand-Regular.ttf"
+dest_files=["res://.godot/imported/PatrickHand-Regular.ttf-b9e493bb1dd9e6fe613eef2abaf966d7.fontdata"]
 
 [params]
 

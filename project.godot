@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Next_Door"
+config/name="Next Door"
 run/main_scene="uid://cs52bd0m1rapv"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://ddippbcyq1sfw"
 
 [autoload]
 
@@ -21,6 +21,7 @@ Inventario="*uid://7ghpuug7hvc2"
 Gamemanager="*uid://djdxgpclhduql"
 Porta="*uid://dichkoyp7yjh3"
 Cursormanager="*uid://cjd2kbm28mhi8"
+Musica="*uid://11ptm11ruvfw"
 
 [display]
 
@@ -32,7 +33,11 @@ window/stretch/aspect="expand"
 
 [gui]
 
-theme/custom_font="uid://bskp780fohwgm"
+theme/custom_font="uid://5jwfj2juq8ms"
+
+[internationalization]
+
+locale/locale_filter_mode=1
 
 [physics]
 

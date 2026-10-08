@@ -18,6 +18,7 @@ var espacamento = 90
 
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	texto.hide()
 	botao_menu.hide()
 
@@ -59,6 +60,12 @@ func _mostrar_texto():
 
 	indice += 1
 	_mostrar_texto()
+
+
+func _input(event):
+
+	if event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _mouse_entrou_botao():
