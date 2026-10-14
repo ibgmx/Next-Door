@@ -32,6 +32,8 @@ extends Node2D
 
 @onready var som_porta = $SomPorta
 @onready var som_porta_entrando = $SomPortaEntrando
+@onready var som_felice = $Felice
+@onready var som_errado = $Errado
 @onready var camera = $Camera2D
 
 # SONS
@@ -106,6 +108,8 @@ var descricao_coleta_ativa := false
 # =========================================================
 
 var ultimo_clique_fora := 0
+var ultimo_som_felice_ms: int = -20000
+var ultimo_som_errado_ms: int = -5000
 
 
 # =========================================================
@@ -939,8 +943,16 @@ func tentar_sair():
 
 		return
 
+	var agora_ms := Time.get_ticks_msec()
+	if som_felice and agora_ms - ultimo_som_felice_ms >= 20000:
+		som_felice.stop()
+		som_felice.play()
+		ultimo_som_felice_ms = agora_ms
 
 	tela_senha.show()
+
+	mensagem.text = "Parece precisar de algo daqui."
+	mensagem.show()
 
 	gaveta_mesa_canvas.hide()
 	gavetinha_canvas.hide()
@@ -948,8 +960,6 @@ func tentar_sair():
 	_bloquear_cenario()
 
 	campo.clear()
-	mensagem.hide()
-
 	campo.grab_focus()
 
 	ultimo_clique_fora = 0
@@ -1009,7 +1019,13 @@ func _verificar_senha():
 
 	else:
 
-		mensagem.text = "Código incorreto."
+		var agora_ms := Time.get_ticks_msec()
+		if som_errado and agora_ms - ultimo_som_errado_ms >= 5000:
+			som_errado.stop()
+			som_errado.play()
+			ultimo_som_errado_ms = agora_ms
+
+		mensagem.text = "Código Incorreto."
 		mensagem.show()
 
 		campo.clear()

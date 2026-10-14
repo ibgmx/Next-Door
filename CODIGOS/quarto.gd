@@ -31,6 +31,8 @@ extends Node2D
 @onready var som_fechando_mala = $MalaAberta/Fechando
 @onready var camera = $Camera2D
 @onready var som_porta_entrada = $SomPortaEntrando
+@onready var som_semana = $Semanas
+@onready var som_boneca = $Boneca
 
 @onready var descricao = $InterfaceDescricao/Descricao
 
@@ -82,14 +84,32 @@ var fala_dias := "O que é isso?"
 var fala_travesseiro := "É aconchegante."
 var fala_texto := "Quem escreveu isso?"
 
+# SEGUNDA FALA: aparece ao clicar no objeto.
+
+var clique_chave := "Você pegou uma chave."
+var clique_papel := "Você pegou um papel."
+var clique_remedio := "Quero distância."
+var clique_papel0 := "Não consigo ler direito."
+var clique_cloza := "Urg..."
+var clique_boneca := "Por que isso me incomoda tanto?"
+var clique_dias := "Muito tempo..."
+var clique_travesseiro := "Não consigo descansar agora."
+var clique_texto := "Espero que tenha conseguido."
+
 
 func _ready():
 
+	if som_porta_entrada:
+		som_porta_entrada.stop()
+		som_porta_entrada.play()
+		
 	gaveta_aberta.hide()
 	mala_aberta.hide()
 
 	descricao.text = ""
 	descricao.modulate.a = 0.0
+	
+	
 
 
 	# =====================================================
@@ -125,6 +145,16 @@ func _ready():
 
 	chave1.input_event.connect(_clicou_chave)
 	papel.input_event.connect(_clicou_papel)
+
+	# CLIQUES QUE MOSTRAM DESCRIÇÕES EDITÁVEIS
+	porta.input_event.connect(_clicou_porta)
+	remedio.input_event.connect(_clicou_objeto.bind(clique_remedio, ""))
+	papel0.input_event.connect(_clicou_objeto.bind(clique_papel0, ""))
+	cloza.input_event.connect(_clicou_objeto.bind(clique_cloza, ""))
+	boneca.input_event.connect(_clicou_objeto.bind(clique_boneca, "boneca"))
+	dias.input_event.connect(_clicou_objeto.bind(clique_dias, "dias"))
+	travesseiro.input_event.connect(_clicou_objeto.bind(clique_travesseiro, ""))
+	texto.input_event.connect(_clicou_objeto.bind(clique_texto, ""))
 
 
 	# =====================================================
@@ -303,6 +333,37 @@ func esconder_descricao():
 
 
 # =========================================================
+# CLIQUE NA PORTA
+# =========================================================
+
+func _clicou_porta(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if Gamemanager.portas_abertas.get("chave1", false):
+				mostrar_descricao(fala_porta_aberta)
+			elif Inventario.tem_item("chave1"):
+				mostrar_descricao(fala_porta_chave)
+			else:
+				mostrar_descricao(fala_porta)
+
+
+# =========================================================
+# CLIQUE EM OBJETOS: MOSTRA A FALA EDITÁVEL NO INÍCIO
+# =========================================================
+
+func _clicou_objeto(_viewport, event, _shape_idx, fala_clique: String, som_objeto: String = ""):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if som_objeto == "dias" and som_semana:
+				som_semana.stop()
+				som_semana.play()
+			elif som_objeto == "boneca" and som_boneca:
+				som_boneca.stop()
+				som_boneca.play()
+			mostrar_descricao(fala_clique)
+
+
+# =========================================================
 # GAVETA
 # =========================================================
 
@@ -313,6 +374,7 @@ func _clicou_gaveta(_viewport, event, _shape_idx):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 			gaveta_aberta.show()
+			mostrar_descricao(fala_gaveta)
 
 		if som_abrindo_gaveta:
 			som_abrindo_gaveta.stop()
@@ -358,6 +420,7 @@ func _clicou_mala(_viewport, event, _shape_idx):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
 			mala_aberta.show()
+			mostrar_descricao(fala_mala)
 
 		if som_abrindo_mala:
 			som_abrindo_mala.stop()
@@ -409,7 +472,7 @@ func _clicou_chave(_viewport, event, _shape_idx):
 
 			Cursormanager.cursor_normal()
 
-			mostrar_descricao("Você pegou uma chave.")
+			mostrar_descricao(clique_chave)
 
 			_fade_descricao_item()
 
@@ -431,7 +494,7 @@ func _clicou_papel(_viewport, event, _shape_idx):
 
 			Cursormanager.cursor_normal()
 
-			mostrar_descricao("Você pegou um papel.")
+			mostrar_descricao(clique_papel)
 
 			_fade_descricao_item()
 

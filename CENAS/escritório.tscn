@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="12_bwvpk"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="13_w6xxg"]
 [ext_resource type="AudioStream" uid="uid://dsgdcqihn5xs2" path="res://SONS/telefone.mp3" id="16_41dsb"]
+[ext_resource type="AudioStream" uid="uid://dcefemp7wlxe" path="res://SONS/Código Escritório.mp3" id="18_jkjvi"]
+[ext_resource type="AudioStream" uid="uid://05wsgghlw1gt" path="res://SONS/Errado Escritório.mp3" id="19_jkjvi"]
 
 [node name="Escritório" type="Node2D" unique_id=619508130]
 script = ExtResource("1_m0gyr")
@@ -271,3 +273,9 @@ polygon = PackedVector2Array(1430, 693, 1430, 654, 1437, 653, 1438, 636, 1449, 6
 
 [node name="CP2D" type="CollisionPolygon2D" parent="Carimbo" unique_id=762889737]
 polygon = PackedVector2Array(493, 677, 488, 651, 497, 644, 511, 641, 509, 630, 502, 623, 503, 611, 514, 600, 521, 600, 532, 606, 536, 615, 530, 629, 530, 640, 540, 640, 545, 651, 547, 663, 538, 677, 523, 677, 506, 678)
+
+[node name="Felice" type="AudioStreamPlayer" parent="." unique_id=462128602]
+stream = ExtResource("18_jkjvi")
+
+[node name="Errado" type="AudioStreamPlayer" parent="." unique_id=1988960309]
+stream = ExtResource("19_jkjvi")

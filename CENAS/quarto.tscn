@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://b0nex7erl5ftx" path="res://SONS/MalaAbrindo.mp3" id="12_hblsg"]
 [ext_resource type="AudioStream" uid="uid://w6sqnkpn2iho" path="res://SONS/MalaFechando.mp3" id="13_lerkc"]
 [ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="14_1wpym"]
+[ext_resource type="AudioStream" uid="uid://rhjjhvbdn3am" path="res://SONS/Semanas.mp3" id="15_hblsg"]
+[ext_resource type="AudioStream" uid="uid://bc0tqhnqvs3h1" path="res://SONS/Boneca.mp3" id="16_lerkc"]
 
 [node name="Quarto" type="Node2D" unique_id=1372419097]
 script = ExtResource("1_agmmv")
@@ -178,3 +180,9 @@ position = Vector2(960, 540)
 
 [node name="SomPortaEntrando" type="AudioStreamPlayer2D" parent="." unique_id=1064594968]
 stream = ExtResource("14_1wpym")
+
+[node name="Semanas" type="AudioStreamPlayer" parent="." unique_id=247266603]
+stream = ExtResource("15_hblsg")
+
+[node name="Boneca" type="AudioStreamPlayer" parent="." unique_id=238087722]
+stream = ExtResource("16_lerkc")

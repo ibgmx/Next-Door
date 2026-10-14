@@ -33,6 +33,8 @@ extends Node2D
 @onready var luz = $Luz
 @onready var preto = $Preto
 @onready var som_click = $Click
+@onready var som_felice = $Felice
+@onready var som_errado = find_child("Errado", true, false)
 
 @onready var chiado_c1 = $C1/Chiado
 @onready var chiado_c2 = $C2/Chiado
@@ -103,6 +105,8 @@ var piscando := false
 var luz_pressionada := false
 var luz_aguardando_soltou := false
 var codigo_erro_tween: Tween
+var ultimo_som_saida_ms: int = -20000
+var ultimo_som_errado_ms: int = -5000
 
 
 func _ready():
@@ -180,6 +184,9 @@ func _ready():
 	quarto.input_event.connect(_clicou_quarto)
 	recepcao.input_event.connect(_clicou_recepcao)
 	gaveta.input_event.connect(_clicou_gaveta)
+	papel1.input_event.connect(_clicou_papel1)
+	papel2.input_event.connect(_clicou_papel2)
+	cadeira.input_event.connect(_clicou_cadeira)
 
 
 	# =====================================================
@@ -294,12 +301,9 @@ func _ready():
 		_balancar_camera()
 
 	else:
-
 		if som_porta_entrando:
 			som_porta_entrando.stop()
 			som_porta_entrando.play()
-
-		_balancar_camera()
 
 
 # =========================================================
@@ -546,7 +550,7 @@ func _mouse_entrou_gravador():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Um gravador.")
+	mostrar_descricao("Parece um gravador.")
 
 
 func _mouse_saiu_gravador():
@@ -581,7 +585,7 @@ func _mouse_entrou_codigo4():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Um código.")
+	mostrar_descricao("Outro símbolo...")
 
 
 func _mouse_saiu_codigo4():
@@ -616,7 +620,7 @@ func _mouse_entrou_tradutor():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Um tradutor.")
+	mostrar_descricao("Uma lista...?")
 
 
 func _mouse_saiu_tradutor():
@@ -719,6 +723,7 @@ func _clicou_ferro(_viewport, event, _shape_idx):
 				som_ferro.stop()
 				som_ferro.play()
 
+			mostrar_descricao("Está quente demais, me machuca.")
 			Cursormanager.cursor_clique()
 
 
@@ -754,6 +759,7 @@ func _clicou_mouse(_viewport, event, _shape_idx):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
+			# Som original do clique do Mouse: permanece sem intervalo.
 			if som_click:
 				som_click.stop()
 				som_click.play()
@@ -765,6 +771,8 @@ func _clicou_mouse(_viewport, event, _shape_idx):
 
 			if c2.visible:
 				_mostrar_status_recepcao()
+			else:
+				mostrar_descricao("Acho que algo aconteceu.")
 
 
 func _mouse_entrou_mouse():
@@ -843,6 +851,28 @@ func _mouse_saiu_gaveta():
 
 
 # =========================================================
+# CLIQUES - OBJETOS DO CENÁRIO
+# =========================================================
+
+func _clicou_papel1(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		mostrar_descricao("Não me parece útil..")
+		Cursormanager.cursor_clique()
+
+
+func _clicou_papel2(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		mostrar_descricao("Não, não encontrei nada aqui.")
+		Cursormanager.cursor_clique()
+
+
+func _clicou_cadeira(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		mostrar_descricao("Melhor deixar como está.")
+		Cursormanager.cursor_clique()
+
+
+# =========================================================
 # ÁREA - PAPEL1
 # =========================================================
 
@@ -850,7 +880,7 @@ func _mouse_entrou_papel1():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Não parece importante.")
+	mostrar_descricao("Alguns registros.")
 
 
 func _mouse_saiu_papel1():
@@ -868,7 +898,7 @@ func _mouse_entrou_papel2():
 
 	Cursormanager.cursor_clique()
 
-	mostrar_descricao("Nada aqui.")
+	mostrar_descricao("Será que é importante?.")
 
 
 func _mouse_saiu_papel2():
@@ -1078,12 +1108,35 @@ func _piscar_aleatorio():
 
 func _input(event):
 
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 
-		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		if event.pressed and tela_codigo.visible:
+			var ponto_mouse = get_viewport().get_mouse_position()
+			var clicou_fora = not _ponto_dentro_tela_codigo(tela_codigo, ponto_mouse)
 
-			if luz_pressionada:
-				_luz_soltou()
+			if clicou_fora:
+				var agora_ms = Time.get_ticks_msec()
+				if agora_ms - ultimo_clique_fora <= 350 and ultimo_clique_fora != 0:
+					_fechar_tela_codigo()
+				else:
+					ultimo_clique_fora = agora_ms
+			else:
+				ultimo_clique_fora = 0
+
+		if not event.pressed and luz_pressionada:
+			_luz_soltou()
+
+
+func _ponto_dentro_tela_codigo(no: Node, ponto_mouse: Vector2) -> bool:
+	for filho in no.get_children():
+		if filho is Control and filho.is_visible_in_tree():
+			if filho.get_global_rect().has_point(ponto_mouse):
+				return true
+
+		if _ponto_dentro_tela_codigo(filho, ponto_mouse):
+			return true
+
+	return false
 
 
 # =========================================================
@@ -1104,6 +1157,12 @@ func tentar_sair():
 
 	if codigo_erro_tween:
 		codigo_erro_tween.kill()
+
+	var agora_ms := Time.get_ticks_msec()
+	if som_felice and agora_ms - ultimo_som_saida_ms >= 20000:
+		som_felice.stop()
+		som_felice.play()
+		ultimo_som_saida_ms = agora_ms
 
 	tela_codigo.show()
 	campo.clear()
@@ -1197,6 +1256,12 @@ func _verificar_codigo():
 
 	else:
 
+		var agora_ms = Time.get_ticks_msec()
+		if som_errado and agora_ms - ultimo_som_errado_ms >= 5000:
+			som_errado.stop()
+			som_errado.play()
+			ultimo_som_errado_ms = agora_ms
+
 		mensagem.text = "Código incorreto."
 		mensagem.show()
 
@@ -1213,7 +1278,7 @@ func _verificar_codigo():
 
 func _voltar_pergunta_codigo():
 	if tela_codigo.visible:
-		mensagem.text = "Quanto tempo se passou?"
+		mensagem.text = "Quanto tempo já se passou?"
 		mensagem.show()
 	codigo_erro_tween = null
 
@@ -1222,64 +1287,23 @@ func _voltar_pergunta_codigo():
 # BALANÇAR CÂMERA
 # =========================================================
 
-func _balancar_camera():
-
-	var posicao_original = camera.position
-
-	var tween = create_tween()
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original + Vector2(-12, 6),
-		0.06
-	)
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original + Vector2(10, -7),
-		0.06
-	)
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original + Vector2(-8, 5),
-		0.06
-	)
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original + Vector2(6, -4),
-		0.06
-	)
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original + Vector2(-3, 2),
-		0.06
-	)
-
-	tween.tween_property(
-		camera,
-		"position",
-		posicao_original,
-		0.12
-	)
-
-
 # =========================================================
 # CURSOR DOS BOTÕES
 # =========================================================
 
-func _mouse_entrou():
 
+func _balancar_camera():
+	var posicao_original = camera.position
+	var tween = create_tween()
+	tween.tween_property(camera, "position", posicao_original + Vector2(-12, 6), 0.06)
+	tween.tween_property(camera, "position", posicao_original + Vector2(10, -7), 0.06)
+	tween.tween_property(camera, "position", posicao_original + Vector2(-8, 5), 0.06)
+	tween.tween_property(camera, "position", posicao_original + Vector2(6, -4), 0.06)
+	tween.tween_property(camera, "position", posicao_original + Vector2(-3, 2), 0.06)
+	tween.tween_property(camera, "position", posicao_original, 0.12)
+
+func _mouse_entrou():
 	Cursormanager.cursor_clique()
 
-
 func _mouse_saiu():
-
 	Cursormanager.cursor_normal()

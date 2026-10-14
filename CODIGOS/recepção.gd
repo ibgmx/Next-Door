@@ -8,6 +8,11 @@ extends Node2D
 @onready var som_cadeira = $Cadeira/Cadeira
 @onready var som_pii = $Código/Pii
 @onready var som_erro = $Código/Erro
+@onready var som_cartao = $Cartão
+@onready var som_felice = $Felice
+@onready var som_tentativa1 = $Tentativa1
+@onready var som_tentativa2 = $Tentativa2
+@onready var som_tentativa3 = $Tentativa3
 @onready var som_trancada = $Porta/Trancada
 @onready var som_porta_entrando = $SomPortaEntrando
 
@@ -37,6 +42,8 @@ extends Node2D
 
 var ultimo_clique_fora := 0
 var tentativas := 3
+var ultimo_som_cartao_ms: int = -5000
+var ultimo_som_felice_ms: int = -20000
 var reiniciando := false
 
 var descricao_tween: Tween
@@ -295,7 +302,7 @@ func _clicou_porta(_viewport, event, _shape_idx):
 				som_trancada.play()
 
 			mostrar_descricao(
-				"Talvez você precise abrir em outro lugar."
+				"Realmente não da pra abrir a força."
 			)
 
 
@@ -346,9 +353,16 @@ func _clicou_codigo(_viewport, event, _shape_idx):
 
 			if not Inventario.tem_item("cartao"):
 
+				# Erro toca a cada clique; Cartão respeita o intervalo de 5 segundos.
 				if som_erro:
 					som_erro.stop()
 					som_erro.play()
+
+				var agora_ms_cartao := Time.get_ticks_msec()
+				if som_cartao and agora_ms_cartao - ultimo_som_cartao_ms >= 5000:
+					som_cartao.stop()
+					som_cartao.play()
+					ultimo_som_cartao_ms = agora_ms_cartao
 
 				mostrar_descricao(
 					"Talvez precise de um cartão."
@@ -360,9 +374,16 @@ func _clicou_codigo(_viewport, event, _shape_idx):
 			# COM CARTÃO → PI
 			# ====================================================
 
+			# Pii toca a cada clique válido; Felice respeita 20 segundos.
 			if som_pii:
 				som_pii.stop()
 				som_pii.play()
+
+			var agora_ms_felice := Time.get_ticks_msec()
+			if som_felice and agora_ms_felice - ultimo_som_felice_ms >= 20000:
+				som_felice.stop()
+				som_felice.play()
+				ultimo_som_felice_ms = agora_ms_felice
 
 			tela_codigo.show()
 
@@ -411,7 +432,7 @@ func _clicou_janela(_viewport, event, _shape_idx):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
-			mostrar_descricao("Não é uma boa ideia...")
+			mostrar_descricao("Definitivamente não é uma boa ideia.")
 
 
 func _mouse_entrou_janela():
@@ -606,6 +627,20 @@ func _verificar_codigo():
 	else:
 
 		tentativas -= 1
+
+		match 3 - tentativas:
+			1:
+				if som_tentativa1:
+					som_tentativa1.stop()
+					som_tentativa1.play()
+			2:
+				if som_tentativa2:
+					som_tentativa2.stop()
+					som_tentativa2.play()
+			3:
+				if som_tentativa3:
+					som_tentativa3.stop()
+					som_tentativa3.play()
 
 		if tentativas > 0:
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bjdim3li6m7ea" path="res://CODIGOS/final.gd" id="1_2ppol"]
 [ext_resource type="Script" uid="uid://w7oo1bal4chc" path="res://CODIGOS/texto.gd" id="1_eagmr"]
+[ext_resource type="AudioStream" uid="uid://cd6dgnwiacxv6" path="res://SONS/Finalização.mp3" id="3_3uoe5"]
 
 [node name="Final" type="Control" unique_id=256258417]
 layout_mode = 3
@@ -44,5 +45,9 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 40
 text = "VOLTAR AO INÍCIO"
 flat = true
+
+[node name="Finalização" type="AudioStreamPlayer" parent="." unique_id=728999452]
+stream = ExtResource("3_3uoe5")
+autoplay = true
 
 [connection signal="pressed" from="BotaoInicio" to="." method="_on_botao_inicio_pressed"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjaycaahgke74"
+path="res://.godot/imported/Câmera Errado.mp3-e95ce371bf865b5c6b5f5e0b054c8e30.mp3str"
+
+[deps]
+
+source_file="res://SONS/Câmera Errado.mp3"
+dest_files=["res://.godot/imported/Câmera Errado.mp3-e95ce371bf865b5c6b5f5e0b054c8e30.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

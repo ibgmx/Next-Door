@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="16_oe1yb"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="17_iup1t"]
 [ext_resource type="AudioStream" uid="uid://bmia1xm02qc5j" path="res://SONS/Ferro.mp3" id="20_oe1yb"]
+[ext_resource type="AudioStream" uid="uid://d1ltvvjuqhtra" path="res://SONS/Quanto-tempo.mp3" id="21_oe1yb"]
+[ext_resource type="AudioStream" uid="uid://bjaycaahgke74" path="res://SONS/Câmera Errado.mp3" id="22_iup1t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5aq51"]
 shader = ExtResource("6_vaxrk")
@@ -314,3 +316,9 @@ volume_db = -10.0
 
 [node name="CD2P" type="CollisionPolygon2D" parent="Ferro" unique_id=1270658744]
 polygon = PackedVector2Array(278, 896, 281, 752, 559, 754, 555, 897)
+
+[node name="Felice" type="AudioStreamPlayer" parent="." unique_id=1674065160]
+stream = ExtResource("21_oe1yb")
+
+[node name="Errado" type="AudioStreamPlayer" parent="." unique_id=209658036]
+stream = ExtResource("22_iup1t")
