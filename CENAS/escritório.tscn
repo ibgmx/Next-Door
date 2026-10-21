@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_hm2e3"]
 [ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_fy1qd"]
 [ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="5_7gemc"]
-[ext_resource type="Texture2D" uid="uid://cnkoaunax6wkx" path="res://ARTES/Gaveta fase 1 sem chave e papel.png" id="6_7gemc"]
 [ext_resource type="AudioStream" uid="uid://drg5ltcleq3dr" path="res://SONS/porta1.mp3" id="6_boebt"]
 [ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="6_fm0xq"]
 [ext_resource type="AudioStream" uid="uid://o63cmtv7ie72" path="res://SONS/fechando.mp3" id="6_y8s8v"]
@@ -13,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bchsdigwklfhx" path="res://ARTES/Papel gaveta fase 1.png" id="7_x167n"]
 [ext_resource type="Texture2D" uid="uid://quancnifscwj" path="res://ARTES/Papel dica fase 3.png" id="9_6h53n"]
 [ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="9_bwvpk"]
+[ext_resource type="Texture2D" uid="uid://nk24dp2l4ll6" path="res://ARTES/gaveta escritorio.png" id="9_jkjvi"]
 [ext_resource type="Texture2D" uid="uid://dpo7dhlvhy8lu" path="res://ARTES/Papel fase 4.png" id="10_rtii7"]
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="12_bwvpk"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="13_w6xxg"]
@@ -135,10 +135,16 @@ stream = ExtResource("6_y8s8v")
 
 [node name="Gavetinha" type="CanvasLayer" parent="." unique_id=370896495]
 
+[node name="Remédio" type="Area2D" parent="Gavetinha" unique_id=714574272]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gavetinha/Remédio" unique_id=1843503735]
+polygon = PackedVector2Array(513, 657, 754, 589, 588, 297, 368, 362)
+
 [node name="Fundo" type="TextureRect" parent="Gavetinha" unique_id=1257639272]
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("6_7gemc")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_jkjvi")
 
 [node name="BotaoFechar" type="TextureButton" parent="Gavetinha" unique_id=1214053145]
 z_index = 10
@@ -158,11 +164,12 @@ texture_normal = ExtResource("5_7gemc")
 [node name="Código3" type="Area2D" parent="Gavetinha" unique_id=1963939606]
 
 [node name="Código3" type="Sprite2D" parent="Gavetinha/Código3" unique_id=273438610]
-position = Vector2(967, 524)
+position = Vector2(1900, 543)
 texture = ExtResource("7_x167n")
 
 [node name="CP2D" type="CollisionPolygon2D" parent="Gavetinha/Código3" unique_id=1201878367]
-polygon = PackedVector2Array(308, 298, 654, 263, 736, 656, 369, 693)
+position = Vector2(415, -87)
+polygon = PackedVector2Array(880, 793, 1255, 755, 1169, 368, 825, 407)
 
 [node name="Abrindo" type="AudioStreamPlayer" parent="Gavetinha" unique_id=1122353268]
 stream = ExtResource("7_erfst")

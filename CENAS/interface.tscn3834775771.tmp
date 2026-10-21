@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://diqas4ivyxcya"]
+
+[ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="1_5rjst"]
+[ext_resource type="Script" uid="uid://d3fae3kfd7lqk" path="res://CODIGOS/interface.gd" id="1_30t02"]
+[ext_resource type="Texture2D" uid="uid://cot14cxv21mda" path="res://ARTES/botao menu.png" id="3_5nu0x"]
+[ext_resource type="Shader" uid="uid://dkfaybu6uno4k" path="res://SHADERS/desfoque.gdshader" id="4_1olv4"]
+[ext_resource type="Texture2D" uid="uid://bavycbbbrn80j" path="res://ARTES/BotãoInventário.png" id="4_xvvkc"]
+[ext_resource type="Texture2D" uid="uid://d25effrqvmxp7" path="res://ARTES/botao voltar.png" id="5_aryhp"]
+[ext_resource type="Texture2D" uid="uid://bxn13rmh5dok6" path="res://ARTES/Reiniciar.png" id="6_1pjf0"]
+[ext_resource type="Texture2D" uid="uid://c6mcyhs6ptylp" path="res://ARTES/Início.png" id="6_8xajy"]
+[ext_resource type="Texture2D" uid="uid://dahqox61p3vyh" path="res://ARTES/Certeza.png" id="7_64xc2"]
+[ext_resource type="Texture2D" uid="uid://8kf6fqv7gih3" path="res://ARTES/Inventário.png" id="10_p704m"]
+[ext_resource type="PackedScene" uid="uid://i5wqe6sexro8" path="res://CENAS/item_inventario.tscn" id="10_rn4yy"]
+[ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="11_rn4yy"]
+[ext_resource type="Texture2D" uid="uid://cbvls2oq4f0i7" path="res://ARTES/Código fase 1.png" id="12_rn4yy"]
+[ext_resource type="Texture2D" uid="uid://pstjigbuw237" path="res://ARTES/Dica fase 3.png" id="13_hhubs"]
+[ext_resource type="Texture2D" uid="uid://534nbke7gvll" path="res://ARTES/Receita hd.png" id="14_mo8yv"]
+[ext_resource type="Texture2D" uid="uid://ctr8cacynvnck" path="res://ARTES/Código fase 3.png" id="15_0aehk"]
+[ext_resource type="Texture2D" uid="uid://cws0v8m3fg1pt" path="res://ARTES/Código fase 4.png" id="16_ln7dw"]
+[ext_resource type="Texture2D" uid="uid://bkswujqn3chbk" path="res://ARTES/Gravador fase 4 png.png" id="17_7bhue"]
+[ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="18_ydr8o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5aq51"]
+shader = ExtResource("4_1olv4")
+shader_parameter/blur_strength = 3.0
+
+[node name="Interface" type="CanvasLayer" unique_id=413016726]
+script = ExtResource("1_30t02")
+
+[node name="MenuPausa" type="CanvasLayer" parent="." unique_id=1666687825]
+process_mode = 3
+visible = false
+
+[node name="Desfoque" type="ColorRect" parent="MenuPausa" unique_id=103781532]
+material = SubResource("ShaderMaterial_5aq51")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.078431375)
+
+[node name="Continuar" type="TextureButton" parent="MenuPausa" unique_id=1839895955]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 836.0
+offset_top = 361.0
+offset_right = -125.0
+offset_bottom = -281.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("5_aryhp")
+
+[node name="Reiniciar" type="TextureButton" parent="MenuPausa" unique_id=1436561586]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 837.0
+offset_top = 481.0
+offset_right = 200.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.189, 0.189)
+texture_normal = ExtResource("6_1pjf0")
+
+[node name="Certeza" type="TextureButton" parent="MenuPausa" unique_id=69131448]
+offset_left = 838.00006
+offset_top = 484.00003
+offset_right = 2255.0
+offset_bottom = 931.0
+scale = Vector2(0.17, 0.17)
+texture_normal = ExtResource("7_64xc2")
+
+[node name="Inicio" type="TextureButton" parent="MenuPausa" unique_id=193100594]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 838.00006
+offset_top = 578.00006
+offset_right = 524.0
+offset_bottom = 342.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.149, 0.149)
+texture_normal = ExtResource("6_8xajy")
+
+[node name="BotãoVoltar" type="TextureButton" parent="." unique_id=2065983328]
+texture_filter = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 199.00002
+offset_top = -19.0
+offset_right = 1369.0
+offset_bottom = 734.0
+grow_vertical = 0
+rotation = 3.1415927
+scale = Vector2(0.15, 0.15)
+texture_normal = ExtResource("1_5rjst")
+
+[node name="BotaoMenu" type="TextureButton" parent="." unique_id=475274068]
+offset_left = 40.999996
+offset_top = 23.999998
+offset_right = 966.0
+offset_bottom = 464.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_5nu0x")
+
+[node name="BotãoInventário" type="TextureButton" parent="." unique_id=2099595556]
+offset_left = 1851.0
+offset_top = 26.0
+offset_right = 1883.0
+offset_bottom = 58.0
+texture_normal = ExtResource("4_xvvkc")
+
+[node name="Itens" type="Control" parent="." unique_id=1810908779]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GradeItens" type="GridContainer" parent="Itens" unique_id=1490236417]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+anchor_bottom = 0.062000003
+offset_left = 1843.0
+offset_top = 65.0
+offset_right = 1762.12
+offset_bottom = 327.03998
+columns = 8
+
+[node name="ItemInventario1" parent="Itens/GradeItens" unique_id=632180642 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "chave1, chave2, chave3"
+nome_item = "Chaves"
+icone = ExtResource("11_rn4yy")
+
+[node name="ItemInventario2" parent="Itens/GradeItens" unique_id=1118676233 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo1"
+nome_item = "Primeiro Códigoi"
+icone = ExtResource("12_rn4yy")
+imagem_documento = ExtResource("12_rn4yy")
+
+[node name="ItemInventario3" parent="Itens/GradeItens" unique_id=418477368 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "dica"
+nome_item = "Dica"
+icone = ExtResource("13_hhubs")
+imagem_documento = ExtResource("13_hhubs")
+
+[node name="ItemInventario4" parent="Itens/GradeItens" unique_id=1379788331 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "receita"
+nome_item = "Receita Médica"
+icone = ExtResource("14_mo8yv")
+imagem_documento = ExtResource("14_mo8yv")
+
+[node name="ItemInventario5" parent="Itens/GradeItens" unique_id=705199038 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo3"
+nome_item = "Terceiro Código"
+icone = ExtResource("15_0aehk")
+imagem_documento = ExtResource("15_0aehk")
+
+[node name="ItemInventario6" parent="Itens/GradeItens" unique_id=1844851336 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo4"
+nome_item = "Quarto Código"
+icone = ExtResource("16_ln7dw")
+imagem_documento = ExtResource("16_ln7dw")
+
+[node name="ItemInventario7" parent="Itens/GradeItens" unique_id=1166813430 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "gravador"
+nome_item = "Gravador"
+icone = ExtResource("17_7bhue")
+imagem_documento = ExtResource("17_7bhue")
+
+[node name="ItemInventario8" parent="Itens/GradeItens" unique_id=228012732 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "cartao"
+nome_item = "Cartão"
+icone = ExtResource("18_ydr8o")
+
+[node name="Fundo" type="TextureRect" parent="Itens" unique_id=1488415696]
+layout_mode = 0
+offset_left = 1841.0
+offset_top = 62.0
+offset_right = 1887.0
+offset_bottom = 396.0
+texture = ExtResource("10_p704m")
+
+[connection signal="pressed" from="MenuPausa/Inicio" to="." method="_on_inicio_pressed"]

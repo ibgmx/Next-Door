@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://534nbke7gvll"
-path="res://.godot/imported/Receita hd.png-548b26488086053a6208e35c99e3ff38.ctex"
+uid="uid://nk24dp2l4ll6"
+path="res://.godot/imported/gaveta escritorio.png-8294a453a7db61cf0b85160bb6467d93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ARTES/Receita hd.png"
-dest_files=["res://.godot/imported/Receita hd.png-548b26488086053a6208e35c99e3ff38.ctex"]
+source_file="res://ARTES/gaveta escritorio.png"
+dest_files=["res://.godot/imported/gaveta escritorio.png-8294a453a7db61cf0b85160bb6467d93.ctex"]
 
 [params]
 

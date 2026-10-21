@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://i5wqe6sexro8"]
+
+[ext_resource type="Script" uid="uid://dct6jgg7i6r1g" path="res://CODIGOS/item_inventario.gd" id="1_0ybk3"]
+
+[node name="ItemInventario" type="TextureButton" unique_id=1118676233]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ybk3")

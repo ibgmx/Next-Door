@@ -27,6 +27,7 @@ extends Node2D
 @onready var tela_codigo = $TelaCodigo
 @onready var campo = $TelaCodigo/CampoTexto
 @onready var botao = $TelaCodigo/BotaoConfirmar
+@onready var botao_fechar_codigo = $TelaCodigo/BotaoFechar
 @onready var mensagem = $TelaCodigo/Mensagem
 
 @onready var descricao = $InterfaceDescricao/Descricao
@@ -55,6 +56,13 @@ var luz_aguardando_soltou := false
 
 
 func _ready():
+
+	# ============================================================
+	# TENTATIVAS (guardadas no Gamemanager)
+	# ============================================================
+
+	tentativas = Gamemanager.tentativas_recepcao
+
 
 	# ============================================================
 	# ESTADO INICIAL
@@ -88,6 +96,18 @@ func _ready():
 
 	botao_fechar_cadeira.mouse_entered.connect(_mouse_entrou_fechar)
 	botao_fechar_cadeira.mouse_exited.connect(_mouse_saiu_fechar)
+
+
+	# ============================================================
+	# BOTÃO FECHAR DA TELA DE CÓDIGO
+	# ============================================================
+
+	botao_fechar_codigo.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	botao_fechar_codigo.pressed.connect(_fechar_tela_codigo)
+
+	botao_fechar_codigo.mouse_entered.connect(_mouse_entrou_fechar)
+	botao_fechar_codigo.mouse_exited.connect(_mouse_saiu_fechar)
 
 
 	# ============================================================
@@ -337,10 +357,7 @@ func _clicou_codigo(_viewport, event, _shape_idx):
 			# clicar novamente no código fecha a tela.
 			if tela_codigo.visible:
 
-				tela_codigo.hide()
-				mensagem.hide()
-				esconder_descricao()
-				ultimo_clique_fora = 0
+				_fechar_tela_codigo()
 
 				return
 
@@ -522,6 +539,18 @@ func mostrar_item_pego(texto: String):
 # FECHAR TELA DO CÓDIGO
 # ============================================================
 
+func _fechar_tela_codigo():
+
+	tela_codigo.hide()
+	mensagem.hide()
+
+	esconder_descricao()
+
+	ultimo_clique_fora = 0
+
+	Cursormanager.cursor_normal()
+
+
 func _process(_delta):
 
 	if luz_pressionada and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -541,12 +570,7 @@ func _input(event):
 
 			if agora - ultimo_clique_fora <= 350:
 
-				tela_codigo.hide()
-				mensagem.hide()
-
-				esconder_descricao()
-
-				ultimo_clique_fora = 0
+				_fechar_tela_codigo()
 
 			else:
 
@@ -627,6 +651,9 @@ func _verificar_codigo():
 	else:
 
 		tentativas -= 1
+
+		# Registra no Gamemanager para não perder ao sair da sala
+		Gamemanager.tentativas_recepcao = tentativas
 
 		match 3 - tentativas:
 			1:
@@ -854,6 +881,9 @@ func _reiniciar_jogo():
 	)
 
 	await tween.finished
+
+	# Zera as tentativas para a nova partida
+	Gamemanager.tentativas_recepcao = 3
 
 	Gamemanager.resetar_jogo()
 	Gamemanager.iniciar_jogo()

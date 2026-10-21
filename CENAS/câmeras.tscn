@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bdik50ac1ejny" path="res://ARTES/Recepção fase 5.png" id="6_y5f2n"]
 [ext_resource type="AudioStream" uid="uid://bsdtj6d1024kh" path="res://SONS/chiado.mp3" id="7_g810c"]
 [ext_resource type="Texture2D" uid="uid://dqbwfb03qwiyt" path="res://ARTES/Gaveta fase 4 sem gravador e papel.png" id="7_ybef1"]
+[ext_resource type="Texture2D" uid="uid://dqfins2fetmht" path="res://ARTES/camera.png" id="8_hh222"]
 [ext_resource type="AudioStream" uid="uid://ctp4yms11io1g" path="res://SONS/porta2.mp3" id="8_y5f2n"]
 [ext_resource type="Texture2D" uid="uid://bkswujqn3chbk" path="res://ARTES/Gravador fase 4 png.png" id="8_ybef1"]
 [ext_resource type="Texture2D" uid="uid://dq8hqbsgt6fsv" path="res://ARTES/Papel gaveta fase 4.png" id="9_3bpju"]
@@ -118,6 +119,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_dee34")
 
+[node name="Efeito" type="ColorRect" parent="C1" unique_id=1700071166]
+material = SubResource("ShaderMaterial_5aq51")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Borda" type="TextureRect" parent="C1" unique_id=1935385446]
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hh222")
+
 [node name="BotaoFechar" type="TextureButton" parent="C1" unique_id=784919696]
 z_index = 10
 texture_filter = 1
@@ -133,12 +146,6 @@ rotation = 3.1415927
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("4_qugrv")
 
-[node name="Efeito" type="ColorRect" parent="C1" unique_id=1700071166]
-material = SubResource("ShaderMaterial_5aq51")
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
-
 [node name="Chiado" type="AudioStreamPlayer" parent="C1" unique_id=1453452202]
 stream = ExtResource("7_g810c")
 volume_db = -4.0
@@ -149,6 +156,18 @@ volume_db = -4.0
 offset_right = 2114.0
 offset_bottom = 1080.0
 texture = ExtResource("6_y5f2n")
+
+[node name="Efeito" type="ColorRect" parent="C2" unique_id=1812477192]
+material = SubResource("ShaderMaterial_5aq51")
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Borda" type="TextureRect" parent="C2" unique_id=945398788]
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_hh222")
 
 [node name="BotaoFechar" type="TextureButton" parent="C2" unique_id=628886447]
 z_index = 10
@@ -164,12 +183,6 @@ grow_vertical = 0
 rotation = 3.1415927
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("4_qugrv")
-
-[node name="Efeito" type="ColorRect" parent="C2" unique_id=1812477192]
-material = SubResource("ShaderMaterial_5aq51")
-offset_right = 1920.0
-offset_bottom = 1080.0
-mouse_filter = 2
 
 [node name="Chiado" type="AudioStreamPlayer" parent="C2" unique_id=1343090283]
 stream = ExtResource("7_g810c")

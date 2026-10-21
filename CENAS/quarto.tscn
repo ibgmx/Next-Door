@@ -23,6 +23,23 @@ script = ExtResource("1_agmmv")
 [node name="Fundo" type="TextureRect" parent="." unique_id=1112822734]
 texture = ExtResource("1_4q2cb")
 
+[node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=407030853]
+layer = 100
+
+[node name="Descricao" type="Label" parent="InterfaceDescricao" unique_id=900847491]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.425
+anchor_bottom = 0.645
+offset_left = -1916.0
+offset_top = 21.0
+offset_right = -817.0
+offset_bottom = -652.6
+theme_override_font_sizes/font_size = 40
+text = "
+"
+horizontal_alignment = 1
+
 [node name="Travesseiro" type="Area2D" parent="." unique_id=388524429]
 
 [node name="CP2D" type="CollisionPolygon2D" parent="Travesseiro" unique_id=1460958138]
@@ -157,23 +174,6 @@ stream = ExtResource("12_hblsg")
 
 [node name="Fechando" type="AudioStreamPlayer" parent="MalaAberta" unique_id=1826672725]
 stream = ExtResource("13_lerkc")
-
-[node name="InterfaceDescricao" type="CanvasLayer" parent="." unique_id=407030853]
-layer = 100
-
-[node name="Descricao" type="Label" parent="InterfaceDescricao" unique_id=900847491]
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.425
-anchor_bottom = 0.645
-offset_left = -1916.0
-offset_top = 21.0
-offset_right = -817.0
-offset_bottom = -652.6
-theme_override_font_sizes/font_size = 40
-text = "
-"
-horizontal_alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1338358408]
 position = Vector2(960, 540)

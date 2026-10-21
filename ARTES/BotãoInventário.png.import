@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8xwwdwx7ttfe"
-path="res://.godot/imported/Receita fase 3.png-36d345a4f43534d3e437dae97391b97b.ctex"
+uid="uid://bavycbbbrn80j"
+path="res://.godot/imported/BotãoInventário.png-bbb1c1df160be5dd278ab69b7276f445.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ARTES/Receita fase 3.png"
-dest_files=["res://.godot/imported/Receita fase 3.png-36d345a4f43534d3e437dae97391b97b.ctex"]
+source_file="res://ARTES/BotãoInventário.png"
+dest_files=["res://.godot/imported/BotãoInventário.png-bbb1c1df160be5dd278ab69b7276f445.ctex"]
 
 [params]
 

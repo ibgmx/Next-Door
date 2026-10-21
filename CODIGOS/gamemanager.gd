@@ -50,6 +50,7 @@ var efeito_corredor_cameras_feito: bool = false
 
 # Guarda quais portas já foram abertas
 var portas_abertas: Dictionary = {}
+var tentativas_recepcao := 3
 
 
 # =========================
@@ -168,6 +169,7 @@ func resetar_jogo() -> void:
 	escritorio_resolvido = false
 	recepcao_resolvida = false
 	cameras_resolvidas = false
+	tentativas_recepcao = 3
 
 
 	# =========================

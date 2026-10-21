@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u52q5f3gxkf8"
-path="res://.godot/imported/Laudo hd.png-592cbe0eca29b5729d3c33b9f953bede.ctex"
+uid="uid://8kf6fqv7gih3"
+path="res://.godot/imported/Inventário.png-58e154e2b622841808c6af405148c265.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ARTES/Laudo hd.png"
-dest_files=["res://.godot/imported/Laudo hd.png-592cbe0eca29b5729d3c33b9f953bede.ctex"]
+source_file="res://ARTES/Inventário.png"
+dest_files=["res://.godot/imported/Inventário.png-58e154e2b622841808c6af405148c265.ctex"]
 
 [params]
 

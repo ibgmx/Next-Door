@@ -1236,10 +1236,7 @@ func _verificar_codigo():
 	var codigo_sem_espacos = codigo.replace(" ", "")
 
 
-	if codigo_sem_espacos == "18" \
-	or codigo_sem_espacos == "18semanas" \
-	or codigo_sem_espacos == "dezoito" \
-	or codigo_sem_espacos == "dezoitosemanas":
+	if _resposta_idade_correta(codigo_sem_espacos):
 
 		Gamemanager.cameras_resolvidas = true
 
@@ -1281,6 +1278,38 @@ func _voltar_pergunta_codigo():
 		mensagem.text = "Quanto tempo já se passou?"
 		mensagem.show()
 	codigo_erro_tween = null
+
+
+func _resposta_idade_correta(codigo: String) -> bool:
+	# Normaliza: minúsculo, sem espaços e sem acento no "três".
+	var c := codigo.strip_edges().to_lower().replace(" ", "")
+	c = c.replace("ê", "e")
+
+	var semanas := ["18", "dezoito"]
+	var sufixos_semana := ["", "semanas", "semana", "sem", "s"]
+	var conectores := ["", "e", "+", ",", ".", "-"]
+	var numeros_dia := ["3", "tres"]
+	var sufixos_dia := ["", "dias", "dia", "d"]
+
+	for s in semanas:
+		for ss in sufixos_semana:
+			var parte_semanas: String = s + ss
+
+			# Só as semanas: "18", "18semanas", "dezoito", "dezoitosemanas"...
+			if c == parte_semanas:
+				return true
+
+			for con in conectores:
+				# Evita aceitar "183" (18 colado com 3 sem nada no meio).
+				if s == "18" and ss == "" and con == "":
+					continue
+
+				for n in numeros_dia:
+					for sd in sufixos_dia:
+						if c == parte_semanas + con + n + sd:
+							return true
+
+	return false
 
 
 # =========================================================

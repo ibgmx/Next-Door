@@ -4,8 +4,24 @@
 [ext_resource type="Script" uid="uid://d3fae3kfd7lqk" path="res://CODIGOS/interface.gd" id="1_30t02"]
 [ext_resource type="Texture2D" uid="uid://cot14cxv21mda" path="res://ARTES/botao menu.png" id="3_5nu0x"]
 [ext_resource type="Shader" uid="uid://dkfaybu6uno4k" path="res://SHADERS/desfoque.gdshader" id="4_1olv4"]
+[ext_resource type="Texture2D" uid="uid://bavycbbbrn80j" path="res://ARTES/BotãoInventário.png" id="4_xvvkc"]
 [ext_resource type="Texture2D" uid="uid://d25effrqvmxp7" path="res://ARTES/botao voltar.png" id="5_aryhp"]
+[ext_resource type="Texture2D" uid="uid://bxn13rmh5dok6" path="res://ARTES/Reiniciar.png" id="6_1pjf0"]
 [ext_resource type="Texture2D" uid="uid://c6mcyhs6ptylp" path="res://ARTES/Início.png" id="6_8xajy"]
+[ext_resource type="Texture2D" uid="uid://dqmwaqoevpbjj" path="res://ARTES/Dica.png" id="6_mo8yv"]
+[ext_resource type="Texture2D" uid="uid://dahqox61p3vyh" path="res://ARTES/Certeza.png" id="7_64xc2"]
+[ext_resource type="Texture2D" uid="uid://8kf6fqv7gih3" path="res://ARTES/Inventário.png" id="10_p704m"]
+[ext_resource type="PackedScene" uid="uid://i5wqe6sexro8" path="res://CENAS/item_inventario.tscn" id="10_rn4yy"]
+[ext_resource type="Texture2D" uid="uid://bnxwne5bvg1qq" path="res://ARTES/Tradição dos códigos.png" id="11_hhubs"]
+[ext_resource type="Texture2D" uid="uid://vfl7s2mahpmf" path="res://ARTES/Chave.png" id="11_rn4yy"]
+[ext_resource type="Script" uid="uid://bq63ifb0mbqjt" path="res://gravador.gd" id="12_ln7dw"]
+[ext_resource type="Texture2D" uid="uid://cbvls2oq4f0i7" path="res://ARTES/Código fase 1.png" id="12_rn4yy"]
+[ext_resource type="Texture2D" uid="uid://pstjigbuw237" path="res://ARTES/Dica fase 3.png" id="13_hhubs"]
+[ext_resource type="Texture2D" uid="uid://ctr8cacynvnck" path="res://ARTES/Código fase 3.png" id="15_0aehk"]
+[ext_resource type="Texture2D" uid="uid://dfa8xtmm8f3ir" path="res://ARTES/receita medica atualizada.png" id="15_hhubs"]
+[ext_resource type="Texture2D" uid="uid://cws0v8m3fg1pt" path="res://ARTES/Código fase 4.png" id="16_ln7dw"]
+[ext_resource type="Texture2D" uid="uid://bkswujqn3chbk" path="res://ARTES/Gravador fase 4 png.png" id="17_7bhue"]
+[ext_resource type="AudioStream" uid="uid://0ttpjxtfhify" path="res://SONS/Tentativa2.mp3" id="22_ln7dw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5aq51"]
 shader = ExtResource("4_1olv4")
@@ -13,6 +29,242 @@ shader_parameter/blur_strength = 3.0
 
 [node name="Interface" type="CanvasLayer" unique_id=413016726]
 script = ExtResource("1_30t02")
+
+[node name="Itens" type="Control" parent="." unique_id=1810908779]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GradeItens" type="GridContainer" parent="Itens" unique_id=1490236417]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.064
+anchor_bottom = 0.062000003
+offset_left = 1838.0
+offset_top = 81.0
+offset_right = 1775.12
+offset_bottom = 343.03998
+scale = Vector2(2, 2)
+columns = 8
+
+[node name="Fundo" type="TextureRect" parent="Itens/GradeItens" unique_id=1488415696]
+layout_mode = 2
+texture = ExtResource("10_p704m")
+
+[node name="ItemInventario1" parent="Itens/GradeItens" unique_id=632180642 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "chave1"
+nome_item = "Chaves"
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario1" unique_id=913055086]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -25.000008
+offset_top = -3.9840078
+offset_right = 152.0
+offset_bottom = 368.168
+scale = Vector2(0.05, 0.05)
+texture_normal = ExtResource("11_rn4yy")
+
+[node name="ItemInventario2" parent="Itens/GradeItens" unique_id=1118676233 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo1"
+nome_item = "Primeiro Código"
+imagem_documento = ExtResource("12_rn4yy")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario2" unique_id=225466477]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -31.999992
+offset_top = 27.016003
+offset_right = 772.0
+offset_bottom = 1092.168
+scale = Vector2(0.02, 0.02)
+texture_normal = ExtResource("12_rn4yy")
+
+[node name="ItemInventario3" parent="Itens/GradeItens" unique_id=418477368 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+offset_transform_enabled = true
+id_item = "dica"
+nome_item = "Dica"
+imagem_documento = ExtResource("6_mo8yv")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario3" unique_id=2105743078]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -37.0
+offset_top = 66.016
+offset_right = 1712.0
+offset_bottom = 953.16797
+scale = Vector2(0.01, 0.01)
+texture_normal = ExtResource("13_hhubs")
+
+[node name="ItemInventario4" parent="Itens/GradeItens" unique_id=1379788331 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "receita"
+nome_item = "Receita Médica"
+imagem_documento = ExtResource("15_hhubs")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario4" unique_id=1496415525]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -41.5
+offset_top = 91.016
+offset_right = 655.5
+offset_bottom = 951.16797
+scale = Vector2(0.025, 0.025)
+texture_normal = ExtResource("15_hhubs")
+
+[node name="ItemInventario5" parent="Itens/GradeItens" unique_id=705199038 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo3"
+nome_item = "Terceiro Código"
+imagem_documento = ExtResource("15_0aehk")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario5" unique_id=214692542]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -44.499996
+offset_top = 123.016014
+offset_right = 759.5
+offset_bottom = 1188.168
+scale = Vector2(0.02, 0.022)
+texture_normal = ExtResource("15_0aehk")
+
+[node name="ItemInventario6" parent="Itens/GradeItens" unique_id=1844851336 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "codigo4"
+nome_item = "Quarto Código"
+imagem_documento = ExtResource("16_ln7dw")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario6" unique_id=1197078529]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -48.0
+offset_top = 186.516
+offset_right = 760.0
+offset_bottom = 1251.668
+scale = Vector2(0.02, 0.021)
+texture_normal = ExtResource("16_ln7dw")
+
+[node name="ItemInventario7" parent="Itens/GradeItens" unique_id=1166813430 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "gravador"
+nome_item = "Gravador"
+imagem_documento = ExtResource("17_7bhue")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario7" unique_id=2095137077]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = -49.5
+offset_top = 219.01602
+offset_right = 588.5
+offset_bottom = 1670.8359
+scale = Vector2(0.015, 0.015)
+texture_normal = ExtResource("17_7bhue")
+script = ExtResource("12_ln7dw")
+
+[node name="Conversa" type="AudioStreamPlayer" parent="Itens/GradeItens/ItemInventario7/Imagem" unique_id=1016816615]
+stream = ExtResource("22_ln7dw")
+
+[node name="ItemInventario8" parent="Itens/GradeItens" unique_id=228012732 instance=ExtResource("10_rn4yy")]
+layout_mode = 2
+id_item = "tradutor"
+nome_item = "Tradutor"
+imagem_documento = ExtResource("11_hhubs")
+
+[node name="Imagem" type="TextureButton" parent="Itens/GradeItens/ItemInventario8" unique_id=84969904]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.039
+anchor_bottom = 0.097
+offset_left = 6.5
+offset_top = -95.0
+offset_right = 832.5
+offset_bottom = 920.0
+scale = Vector2(0.02, 0.02)
+texture_normal = ExtResource("11_hhubs")
+
+[node name="MenuPausa" type="CanvasLayer" parent="." unique_id=1666687825]
+process_mode = 3
+visible = false
+
+[node name="Desfoque" type="ColorRect" parent="MenuPausa" unique_id=103781532]
+material = SubResource("ShaderMaterial_5aq51")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.078431375)
+
+[node name="Continuar" type="TextureButton" parent="MenuPausa" unique_id=1839895955]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 836.0
+offset_top = 361.0
+offset_right = -125.0
+offset_bottom = -281.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("5_aryhp")
+
+[node name="Reiniciar" type="TextureButton" parent="MenuPausa" unique_id=1436561586]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 837.0
+offset_top = 481.0
+offset_right = 200.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.189, 0.189)
+texture_normal = ExtResource("6_1pjf0")
+
+[node name="Certeza" type="TextureButton" parent="MenuPausa" unique_id=69131448]
+offset_left = 838.00006
+offset_top = 484.00003
+offset_right = 2255.0
+offset_bottom = 931.0
+scale = Vector2(0.17, 0.17)
+texture_normal = ExtResource("7_64xc2")
+
+[node name="Inicio" type="TextureButton" parent="MenuPausa" unique_id=193100594]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 838.00006
+offset_top = 578.00006
+offset_right = 524.0
+offset_bottom = 342.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.149, 0.149)
+texture_normal = ExtResource("6_8xajy")
 
 [node name="BotãoVoltar" type="TextureButton" parent="." unique_id=2065983328]
 texture_filter = 1
@@ -37,58 +289,11 @@ scale = Vector2(0.1, 0.1)
 texture_normal = ExtResource("3_5nu0x")
 
 [node name="BotãoInventário" type="TextureButton" parent="." unique_id=2099595556]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MenuPausa" type="CanvasLayer" parent="." unique_id=1666687825]
-process_mode = 3
-
-[node name="Desfoque" type="ColorRect" parent="MenuPausa" unique_id=103781532]
-material = SubResource("ShaderMaterial_5aq51")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0.078431375)
-
-[node name="Continuar" type="TextureButton" parent="MenuPausa" unique_id=1839895955]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 833.0
-offset_top = 331.0
-offset_right = -128.0
-offset_bottom = -311.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("5_aryhp")
-
-[node name="Reiniciar" type="TextureButton" parent="MenuPausa" unique_id=1436561586]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 832.0
-offset_top = 454.0
-offset_right = -129.0
-offset_bottom = -188.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("5_aryhp")
-
-[node name="Inicio" type="TextureButton" parent="MenuPausa" unique_id=193100594]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 835.00006
-offset_top = 579.0
-offset_right = 521.0
-offset_bottom = 343.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.15, 0.15)
-texture_normal = ExtResource("6_8xajy")
+offset_left = 1838.0
+offset_top = 15.0
+offset_right = 1870.0
+offset_bottom = 47.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_xvvkc")
 
 [connection signal="pressed" from="MenuPausa/Inicio" to="." method="_on_inicio_pressed"]

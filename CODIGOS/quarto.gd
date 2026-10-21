@@ -487,7 +487,7 @@ func _clicou_papel(_viewport, event, _shape_idx):
 
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
-			Inventario.adicionar_item("papel")
+			Inventario.adicionar_item("codigo1")
 
 			papel.hide()
 			papel.input_pickable = false

@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="3_c1ud4"]
 [ext_resource type="AudioStream" uid="uid://djw1gn2xmtteg" path="res://SONS/Pii.mp3" id="3_iqec1"]
 [ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_jifk2"]
-[ext_resource type="Texture2D" uid="uid://bmxyl77lj6d3s" path="res://ARTES/Papel mala fase 1.png" id="5_5ljhr"]
 [ext_resource type="AudioStream" uid="uid://d1if5bq4syfnh" path="res://SONS/Erro.mp3" id="5_6f5ko"]
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="5_pl41m"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="6_iqec1"]
@@ -18,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://dg3xcsxf3sanx" path="res://SONS/Tentativa3.mp3" id="10_eybbn"]
 [ext_resource type="AudioStream" uid="uid://0ttpjxtfhify" path="res://SONS/Tentativa2.mp3" id="10_iee30"]
 [ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="11_1n3e4"]
+[ext_resource type="Texture2D" uid="uid://byn6bswlav7yi" path="res://ARTES/cartao.png" id="11_iee30"]
 
 [node name="Recepção" type="Node2D" unique_id=121315396]
 script = ExtResource("1_2v43m")
@@ -141,11 +141,14 @@ texture_normal = ExtResource("3_c1ud4")
 [node name="Cartão" type="Area2D" parent="CadeiraAberta" unique_id=1601589689]
 
 [node name="cartão" type="Sprite2D" parent="CadeiraAberta/Cartão" unique_id=209401947]
-position = Vector2(636, 520)
-texture = ExtResource("5_5ljhr")
+position = Vector2(645, 487.00006)
+rotation = -0.3525565
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("11_iee30")
 
 [node name="CP2D" type="CollisionPolygon2D" parent="CadeiraAberta/Cartão" unique_id=1460529646]
-polygon = PackedVector2Array(506, 487, 704, 447, 766, 537, 560, 594)
+position = Vector2(13, -17)
+polygon = PackedVector2Array(581, 584, 568, 556, 555, 522, 547, 499, 562, 492, 617, 471, 661, 457, 680, 449, 688, 461, 698, 488, 709, 517, 712, 532, 700, 540, 677, 551, 649, 562, 622, 573, 598, 581)
 
 [node name="Porta" type="Area2D" parent="." unique_id=1735909146]
 
