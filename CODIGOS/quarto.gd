@@ -221,7 +221,7 @@ func _ready():
 		chave1.input_pickable = false
 
 
-	if Inventario.tem_item("papel"):
+	if Inventario.tem_item("codigo1"):
 
 		papel.hide()
 		papel.input_pickable = false

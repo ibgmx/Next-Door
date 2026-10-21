@@ -133,12 +133,23 @@ stream = ExtResource("7_erfst")
 [node name="Fechando" type="AudioStreamPlayer" parent="GavetaMesa" unique_id=287435853]
 stream = ExtResource("6_y8s8v")
 
+[node name="Folha1" type="Area2D" parent="GavetaMesa" unique_id=1157157600]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaMesa/Folha1" unique_id=677473758]
+polygon = PackedVector2Array(358, 709, 742, 669, 657, 278, 304, 314)
+
+[node name="Folha2" type="Area2D" parent="GavetaMesa" unique_id=1101801211]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaMesa/Folha2" unique_id=437826208]
+polygon = PackedVector2Array(747, 361, 1058, 323, 1103, 712, 825, 744)
+
+[node name="Folha3" type="Area2D" parent="GavetaMesa" unique_id=1769892589]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaMesa/Folha3" unique_id=195894254]
+polygon = PackedVector2Array(1163, 670, 1251, 274, 1564, 314, 1496, 708)
+
 [node name="Gavetinha" type="CanvasLayer" parent="." unique_id=370896495]
-
-[node name="Remédio" type="Area2D" parent="Gavetinha" unique_id=714574272]
-
-[node name="CP2D" type="CollisionPolygon2D" parent="Gavetinha/Remédio" unique_id=1843503735]
-polygon = PackedVector2Array(513, 657, 754, 589, 588, 297, 368, 362)
+visible = false
 
 [node name="Fundo" type="TextureRect" parent="Gavetinha" unique_id=1257639272]
 offset_right = 40.0
@@ -160,6 +171,11 @@ grow_vertical = 0
 rotation = 3.1415927
 scale = Vector2(0.15, 0.15)
 texture_normal = ExtResource("5_7gemc")
+
+[node name="Remédio" type="Area2D" parent="Gavetinha" unique_id=714574272]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="Gavetinha/Remédio" unique_id=1843503735]
+polygon = PackedVector2Array(513, 657, 754, 589, 588, 297, 368, 362)
 
 [node name="Código3" type="Area2D" parent="Gavetinha" unique_id=1963939606]
 

@@ -30,11 +30,10 @@ vertical_alignment = 1
 
 [node name="BotaoPular" type="Button" parent="." unique_id=1216766583]
 layout_mode = 1
-offset_left = 767.0
+offset_left = 2.0
 offset_top = 1004.0
-offset_right = 976.0
-offset_bottom = 1035.0
-scale = Vector2(2, 2)
+offset_right = 1915.0
+offset_bottom = 1054.0
 theme_override_font_sizes/font_size = 30
 text = "Clique para pular (ou espaço)"
 flat = true

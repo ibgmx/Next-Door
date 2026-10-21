@@ -44,6 +44,9 @@ extends Node2D
 
 @onready var som_abrindo = $GavetaAberta/Abrindo
 @onready var som_fechar = $GavetaAberta/Fechando
+@onready var caneta = $GavetaAberta/Caneta
+@onready var giz = $GavetaAberta/Giz
+@onready var lapis = $"GavetaAberta/Lápis"
 
 
 # =========================================================

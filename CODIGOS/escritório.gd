@@ -68,6 +68,10 @@ extends Node2D
 @onready var caixa = $Caixa
 @onready var telefone = $Telefone
 @onready var cloza = $Cloza
+@onready var folha1 = $GavetaMesa/Folha1
+@onready var folha2 = $GavetaMesa/Folha2
+@onready var folha3 = $GavetaMesa/Folha3
+@onready var pilula = $Gavetinha/Remédio
 
 
 # =========================================================
@@ -227,6 +231,10 @@ func _ready():
 	_configurar_area(caixa, _clicou_caixa, _mouse_entrou_caixa, _mouse_saiu_caixa)
 	_configurar_area(telefone, _clicou_telefone, _mouse_entrou_telefone, _mouse_saiu_telefone)
 	_configurar_area(cloza, _clicou_cloza, _mouse_entrou_cloza, _mouse_saiu_cloza)
+	_configurar_area(folha1, _clicou_folha1, _mouse_entrou_folha1, _mouse_saiu_folha1)
+	_configurar_area(folha2, _clicou_folha2, _mouse_entrou_folha2, _mouse_saiu_folha2)
+	_configurar_area(folha3, _clicou_folha3, _mouse_entrou_folha3, _mouse_saiu_folha3)
+	_configurar_area(pilula, _clicou_pilula, _mouse_entrou_pilula, _mouse_saiu_pilula)
 
 
 	# =====================================================
@@ -789,7 +797,66 @@ func _mouse_entrou_cloza():
 func _mouse_saiu_cloza():
 	Cursormanager.cursor_normal()
 	esconder_descricao()
+	
+func _clicou_folha1(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		Cursormanager.cursor_clique()
+		mostrar_descricao("Credo...")
 
+
+func _mouse_entrou_folha1():
+	Cursormanager.cursor_clique()
+	mostrar_descricao("Tem vários remédios escritos aqui.")
+
+
+func _mouse_saiu_folha1():
+	Cursormanager.cursor_normal()
+	esconder_descricao()	
+	
+func _clicou_folha2(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		Cursormanager.cursor_clique()
+		mostrar_descricao("Sinto que está me observando...")
+
+
+func _mouse_entrou_folha2():
+	Cursormanager.cursor_clique()
+	mostrar_descricao("Um olho?")
+
+
+func _mouse_saiu_folha2():
+	Cursormanager.cursor_normal()
+	esconder_descricao()	
+
+func _clicou_folha3(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		Cursormanager.cursor_clique()
+		mostrar_descricao("Nenhum familiar.")
+
+
+func _mouse_entrou_folha3():
+	Cursormanager.cursor_clique()
+	mostrar_descricao("Muitos nomes escritos...")
+
+
+func _mouse_saiu_folha3():
+	Cursormanager.cursor_normal()
+	esconder_descricao()	
+	
+func _clicou_pilula(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		Cursormanager.cursor_clique()
+		mostrar_descricao("De novo isso?")
+
+
+func _mouse_entrou_pilula():
+	Cursormanager.cursor_clique()
+	mostrar_descricao("Pílulas...")
+
+
+func _mouse_saiu_pilula():
+	Cursormanager.cursor_normal()
+	esconder_descricao()
 
 # =========================================================
 # TAYLOR

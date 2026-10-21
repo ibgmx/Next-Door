@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://diqas4ivyxcya" path="res://CENAS/interface.tscn" id="2_ka3vc"]
 [ext_resource type="Texture2D" uid="uid://cbisr5my6mpev" path="res://ARTES/Seta.png" id="3_c1ud4"]
 [ext_resource type="AudioStream" uid="uid://djw1gn2xmtteg" path="res://SONS/Pii.mp3" id="3_iqec1"]
-[ext_resource type="Texture2D" uid="uid://cf8oxdi4dyq3w" path="res://ARTES/Gaveta escritório sem chave.png" id="4_jifk2"]
 [ext_resource type="AudioStream" uid="uid://d1if5bq4syfnh" path="res://SONS/Erro.mp3" id="5_6f5ko"]
 [ext_resource type="AudioStream" uid="uid://ch3nfmsawa0n3" path="res://SONS/segurou.mp3" id="5_pl41m"]
 [ext_resource type="AudioStream" uid="uid://dtrc852ufd84y" path="res://SONS/soltou.mp3" id="6_iqec1"]
@@ -14,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b5x40m6n8hc76" path="res://SONS/Cartão.mp3" id="8_iee30"]
 [ext_resource type="AudioStream" uid="uid://40eev4k4jgsi" path="res://SONS/Tentativa1.mp3" id="9_1obmp"]
 [ext_resource type="AudioStream" uid="uid://bqdtqjp50k1fu" path="res://SONS/trancado.mp3" id="9_k6f7c"]
+[ext_resource type="Texture2D" uid="uid://yws5rlvb4h8y" path="res://ARTES/cadeira.png" id="10_1obmp"]
 [ext_resource type="AudioStream" uid="uid://dg3xcsxf3sanx" path="res://SONS/Tentativa3.mp3" id="10_eybbn"]
 [ext_resource type="AudioStream" uid="uid://0ttpjxtfhify" path="res://SONS/Tentativa2.mp3" id="10_iee30"]
 [ext_resource type="AudioStream" uid="uid://bci6pvb2ix4nj" path="res://SONS/PortaCamerasFechando.mp3" id="11_1n3e4"]
@@ -121,7 +121,8 @@ volume_db = -12.0
 [node name="Fundo" type="TextureRect" parent="CadeiraAberta" unique_id=996807537]
 offset_right = 1945.0
 offset_bottom = 1080.0
-texture = ExtResource("4_jifk2")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_1obmp")
 
 [node name="BotaoFechar" type="TextureButton" parent="CadeiraAberta" unique_id=1857016621]
 z_index = 10
@@ -141,14 +142,14 @@ texture_normal = ExtResource("3_c1ud4")
 [node name="Cartão" type="Area2D" parent="CadeiraAberta" unique_id=1601589689]
 
 [node name="cartão" type="Sprite2D" parent="CadeiraAberta/Cartão" unique_id=209401947]
-position = Vector2(645, 487.00006)
+position = Vector2(959, 638.99994)
 rotation = -0.3525565
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("11_iee30")
 
 [node name="CP2D" type="CollisionPolygon2D" parent="CadeiraAberta/Cartão" unique_id=1460529646]
-position = Vector2(13, -17)
-polygon = PackedVector2Array(581, 584, 568, 556, 555, 522, 547, 499, 562, 492, 617, 471, 661, 457, 680, 449, 688, 461, 698, 488, 709, 517, 712, 532, 700, 540, 677, 551, 649, 562, 622, 573, 598, 581)
+position = Vector2(327, 134)
+polygon = PackedVector2Array(542, 601, 524, 555, 507, 505, 507, 494, 519, 486, 602, 456, 664, 434, 693, 423, 706, 421, 712, 427, 722, 452, 740, 504, 754, 537, 756, 549, 748, 556, 719, 568, 673, 586, 592, 617, 561, 628, 549, 621)
 
 [node name="Porta" type="Area2D" parent="." unique_id=1735909146]
 

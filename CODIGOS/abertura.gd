@@ -9,9 +9,9 @@ var textos = [
 	"Você pode pegar os itens do inventário e move-los pela tela",
 	"Explore com calma.",
 	"...",
-	"Eu não sei onde estou",
 	"Eu não sei quem eu sou",
-	"Eu não lembro o que aconteceu",
+	"Eu não sei onde estou",
+	"Eu não sei o que aconteceu",
 	"Eu não quero lembrar o que aconteceu."
 ]
 

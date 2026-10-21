@@ -236,6 +236,21 @@ stream = ExtResource("12_velyu")
 [node name="Fechando" type="AudioStreamPlayer" parent="GavetaAberta" unique_id=1318188543]
 stream = ExtResource("13_hs55i")
 
+[node name="Caneta" type="Area2D" parent="GavetaAberta" unique_id=114099877]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Caneta" unique_id=1147125295]
+polygon = PackedVector2Array(850, 671, 846, 641, 863, 588, 880, 548, 898, 509, 920, 459, 931, 431, 958, 372, 970, 335, 984, 308, 1000, 297, 1017, 306, 1020, 320, 1023, 346, 1017, 364, 1009, 392, 999, 414, 985, 436, 974, 440, 968, 448, 961, 465, 952, 490, 925, 553, 909, 591, 898, 622, 888, 645, 874, 661, 855, 673)
+
+[node name="Giz" type="Area2D" parent="GavetaAberta" unique_id=1931018952]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Giz" unique_id=542259552]
+polygon = PackedVector2Array(943, 663, 942, 630, 958, 598, 1072, 364, 1094, 343, 1105, 336, 1116, 339, 1118, 353, 1116, 378, 1107, 404, 990, 656, 977, 669, 965, 677, 955, 676)
+
+[node name="Lápis" type="Area2D" parent="GavetaAberta" unique_id=135669149]
+
+[node name="CP2D" type="CollisionPolygon2D" parent="GavetaAberta/Lápis" unique_id=1111073032]
+polygon = PackedVector2Array(1055, 690, 1052, 677, 1063, 648, 1160, 394, 1199, 349, 1204, 351, 1200, 412, 1094, 687, 1087, 696, 1076, 701, 1057, 696)
+
 [node name="SomPorta" type="AudioStreamPlayer2D" parent="." unique_id=1094431608]
 stream = ExtResource("8_y5f2n")
 
